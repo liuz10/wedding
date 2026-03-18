@@ -1,0 +1,41 @@
+import styles from './GettingThere.module.css';
+
+const travelOptions = [
+  {
+    title: 'Fly In',
+    detail: 'Closest airports are SFO and OAK. We recommend arriving by Thursday evening.',
+  },
+  {
+    title: 'Getting Around',
+    detail: 'Rideshare is easiest between venues. Public transit is also available across the city.',
+  },
+  {
+    title: 'Where to Stay',
+    detail: 'Hotel block details will be shared soon. Nearby neighborhoods: Marina, Nob Hill, and Union Square.',
+  },
+];
+
+export default function GettingThere() {
+  return (
+    <section id="getting-there" className={styles.section}>
+      <div className="container">
+        <p className="section-subtitle">Travel</p>
+        <h2 className="section-title">Getting There</h2>
+        <div className="section-divider"><span>✦</span></div>
+
+        <p className={styles.intro}>
+          Transportation info to help you plan a smooth wedding weekend.
+        </p>
+
+        <div className={styles.grid}>
+          {travelOptions.map(({ title, detail }) => (
+            <article key={title} className={styles.card}>
+              <h3>{title}</h3>
+              <p>{detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

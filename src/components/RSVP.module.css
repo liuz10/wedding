@@ -1,5 +1,8 @@
 .section {
   background: var(--color-blush-light);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .devNotice {

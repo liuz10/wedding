@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
 const navLinks = [
-  { label: 'Our Story', href: '#details' },
-  { label: 'Details', href: '#details' },
+  { label: 'Ceremony', href: '#ceremony-photo' },
+  { label: 'Getting There', href: '#getting-there' },
+  { label: 'Weekend Schedule', href: '#details' },
+  { label: 'Dress Code', href: '#dress-code' },
   { label: 'RSVP', href: '#rsvp' },
-  { label: 'Gallery', href: '#gallery' },
 ];
 
 export default function Header() {
@@ -24,7 +25,7 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <a href="#hero" className={styles.brand}>
-          [Partner 1] &amp; [Partner 2]
+          Alice &amp; Johnny
         </a>
 
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>

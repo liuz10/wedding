@@ -10,13 +10,10 @@ export default function Hero() {
       <div className={styles.petalBottomRight} aria-hidden="true" />
 
       <div className={styles.content}>
-        <p className={styles.preTitle}>Together with their families</p>
+        <p className={styles.preTitle}>Save the Date</p>
 
-        <div className={styles.names}>
-          <span className={styles.name}>[Partner 1]</span>
-          <span className={styles.ampersand}>&amp;</span>
-          <span className={styles.name}>[Partner 2]</span>
-        </div>
+        <h1 className={styles.mainTitle}>We are getting married!</h1>
+        <p className={styles.coupleName}>Alice Wang &amp; Johnny Liu</p>
 
         <div className={styles.divider} aria-hidden="true">
           <span className={styles.dividerLine} />
@@ -24,9 +21,7 @@ export default function Hero() {
           <span className={styles.dividerLine} />
         </div>
 
-        <p className={styles.invite}>
-          request the honour of your presence at their wedding celebration
-        </p>
+        <p className={styles.invite}>Join us for a three-day celebration in San Francisco.</p>
 
         <div className={styles.details}>
           <div className={styles.detail}>

@@ -2,17 +2,17 @@
 
 /* ── CSS Custom Properties ── */
 :root {
-  --color-blush: #f2c4ce;
-  --color-blush-light: #fdf0f2;
-  --color-blush-dark: #e8a0b0;
-  --color-cream: #faf6f0;
-  --color-cream-dark: #f0e8dc;
-  --color-gold: #c9a96e;
-  --color-gold-light: #e8d5b0;
-  --color-gold-dark: #a8883a;
-  --color-text: #3d2b1f;
-  --color-text-light: #7a5c4a;
-  --color-text-muted: #a08070;
+  --color-blush: #f3d7dc;       /* Pantone 12-2907 */
+  --color-blush-light: #fcf2f4;
+  --color-blush-dark: #e7bcc6;
+  --color-cream: #f2efe8;       /* Pantone 11-0907 */
+  --color-cream-dark: #e7decd;  /* Pantone 12-1107 */
+  --color-gold: #b8c46a;        /* Pantone 15-0531 */
+  --color-gold-light: #ecefbf;  /* Pantone 12-0312 */
+  --color-gold-dark: #8f9f45;
+  --color-text: #4b4439;
+  --color-text-light: #7a705f;
+  --color-text-muted: #9a8f7f;
   --color-white: #ffffff;
   --color-error: #c0392b;
   --color-success: #27ae60;

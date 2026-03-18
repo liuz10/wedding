@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.names}>
-          [Partner 1] &amp; [Partner 2]
+          Alice &amp; Johnny
         </div>
 
         <div className={styles.divider} aria-hidden="true">✦</div>

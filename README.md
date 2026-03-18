@@ -51,8 +51,8 @@ Search the source files for these placeholders and replace them:
 
 | Placeholder | Where to replace |
 |---|---|
-| `[Partner 1]` | `Header.jsx`, `Hero.jsx`, `Footer.jsx` |
-| `[Partner 2]` | `Header.jsx`, `Hero.jsx`, `Footer.jsx` |
+| `Alice` | `Header.jsx`, `Hero.jsx`, `Footer.jsx` |
+| `Johnny` | `Header.jsx`, `Hero.jsx`, `Footer.jsx` |
 | `[Venue Name]` | `Details.jsx` |
 | `[Address]` | `Details.jsx` |
 | `[Reception Venue]` | `Details.jsx` |

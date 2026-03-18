@@ -8,6 +8,7 @@ const INITIAL = {
   email: '',
   attendance: '',
   guests: '1',
+  arrivalDate: '',
   dietary: '',
 };
 
@@ -176,6 +177,21 @@ export default function RSVP() {
               />
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}
             </div>
+          </div>
+
+          <div className={styles.field}>
+            <label htmlFor="rsvp-arrival-date" className={styles.label}>
+              What date do you plan to arrive?
+            </label>
+            <input
+              id="rsvp-arrival-date"
+              type="text"
+              name="arrivalDate"
+              value={form.arrivalDate}
+              onChange={handleChange}
+              placeholder="Example: Thursday, October 16"
+              className={styles.input}
+            />
           </div>
 
           <div className={styles.field}>

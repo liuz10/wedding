@@ -2,31 +2,31 @@ import styles from './Details.module.css';
 
 const events = [
   {
-    icon: '💍',
-    title: 'Ceremony',
-    time: '3:00 PM',
-    venue: '[Venue Name]',
-    address: '[Street Address]',
+    icon: '⛵',
+    title: 'Day 1 · Welcome Sunset Sailing Party',
+    time: 'Sunset',
+    venue: 'Welcome Boat Sailing Party',
+    address: 'Marina Departure Dock',
     city: 'San Francisco, CA',
-    note: 'Please arrive 15 minutes early.',
+    note: 'Kick off the wedding weekend with golden-hour views on the water.',
   },
   {
-    icon: '🥂',
-    title: 'Reception',
-    time: '5:30 PM',
-    venue: '[Reception Venue]',
-    address: '[Street Address]',
+    icon: '💒',
+    title: 'Day 2 · Wedding Day',
+    time: 'Ceremony · Reception · After Party',
+    venue: 'Wedding Celebration',
+    address: 'Ceremony & Reception Venue',
     city: 'San Francisco, CA',
-    note: 'Dinner and dancing to follow.',
+    note: 'Our main celebration day with vows, dinner, dancing, and a late-night after party.',
   },
   {
-    icon: '🏨',
-    title: 'Accommodation',
-    time: null,
-    venue: '[Hotel Name]',
-    address: '[Hotel Address]',
+    icon: '🥐',
+    title: 'Day 3 · Farewell Brunch',
+    time: 'Late Morning',
+    venue: 'Farewell Brunch',
+    address: 'Brunch Venue',
     city: 'San Francisco, CA',
-    note: 'Room block available — use code [WEDDING CODE] for a discounted rate.',
+    note: 'One final meal together before we send everyone off with love.',
   },
 ];
 
@@ -34,9 +34,20 @@ export default function Details() {
   return (
     <section id="details" className={styles.section}>
       <div className="container">
-        <p className="section-subtitle">Join Us</p>
-        <h2 className="section-title">Wedding Details</h2>
+        <p className="section-subtitle">Weekend Events</p>
+        <h2 className="section-title">Wedding Weekend Schedule</h2>
         <div className="section-divider"><span>✦</span></div>
+
+        <div className={styles.featureImages}>
+          <figure className={styles.featureCard}>
+            <img src="/docs/images/glance-2.jpg" alt="Boat celebration inspiration for welcome sailing party" loading="lazy" />
+            <figcaption>Day 1 · Sunset Boat Welcome Party</figcaption>
+          </figure>
+          <figure className={styles.featureCard}>
+            <img src="/docs/images/glance-1.jpg" alt="Scenic city and water view for wedding weekend atmosphere" loading="lazy" />
+            <figcaption>Weekend Views · San Francisco</figcaption>
+          </figure>
+        </div>
 
         <div className={styles.grid}>
           {events.map(({ icon, title, time, venue, address, city, note }) => (
