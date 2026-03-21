@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Build and sync production branch
+    name: Verify build and sync branch
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -36,9 +36,8 @@ jobs:
         env:
           VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL }}
 
-      - name: Publish docs to production branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: production
-          publish_dir: ./docs
+      - name: Sync main to production branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git push origin HEAD:production
