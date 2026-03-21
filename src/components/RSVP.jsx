@@ -51,8 +51,11 @@ export default function RSVP() {
       setStatus('success');
       return;
     }
-    if (SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
-      console.error('VITE_GOOGLE_SCRIPT_URL is still using placeholder value.');
+    if (
+      SCRIPT_URL.includes('YOUR_SCRIPT_ID') ||
+      SCRIPT_URL.includes('YOUR_SCRIPT_URL_HERE')
+    ) {
+      console.error('Google Script URL is still using placeholder value.');
       setStatus('error');
       return;
     }
@@ -62,10 +65,14 @@ export default function RSVP() {
       const endpoint = new URL(SCRIPT_URL);
       Object.entries(form).forEach(([k, v]) => endpoint.searchParams.set(k, v));
       endpoint.searchParams.set('source', 'website');
+      endpoint.searchParams.set('_ts', `${Date.now()}`);
 
-      // GET beacon fallback is more reliable across Apps Script deployments
-      // where browser POSTs may redirect to non-JSON error pages.
-      await fetch(endpoint.toString(), { method: 'GET', mode: 'no-cors' });
+      await fetch(endpoint.toString(), {
+        method: 'GET',
+        mode: 'no-cors',
+        credentials: 'omit',
+        cache: 'no-store',
+      });
       setStatus('success');
       setForm(INITIAL);
     } catch (err) {
