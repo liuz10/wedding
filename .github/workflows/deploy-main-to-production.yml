@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Build and sync production branch
+    name: Build and sync source branch
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -36,9 +36,5 @@ jobs:
         env:
           VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL }}
 
-      - name: Publish docs to production branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: production
-          publish_dir: ./docs
+      - name: Push main commit to production branch
+        run: git push origin HEAD:production
