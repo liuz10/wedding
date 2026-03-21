@@ -37,4 +37,7 @@ jobs:
           VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL }}
 
       - name: Push main commit to production branch
-        run: git push origin HEAD:production
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git push --force-with-lease origin HEAD:production
