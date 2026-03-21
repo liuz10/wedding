@@ -55,12 +55,53 @@ function doPost(e) {
  * Handles HTTP GET requests (used to verify the deployment is live).
  * @returns {GoogleAppsScript.Content.TextOutput}
  */
-function doGet() {
-  return buildResponse({
-    result: 'ok',
-    message: 'Wedding RSVP endpoint is live.',
-    sheet: SHEET_NAME,
-  });
+function doGet(e) {
+  try {
+    validateConfig();
+
+    var params = e && e.parameter ? e.parameter : {};
+    var hasPayload =
+      hasValue(params.name) ||
+      hasValue(params.email) ||
+      hasValue(params.attendance);
+
+    if (hasPayload) {
+      var sheet = getOrCreateSheet();
+      var timestamp = new Date().toISOString();
+      var name = sanitize(params.name);
+      var email = sanitize(params.email);
+      var attendance = sanitize(params.attendance);
+      var guests = sanitize(params.guests);
+      var arrivalDate = sanitize(params.arrivalDate);
+      var dietary = sanitize(params.dietary);
+      var source = sanitize(params.source || 'website-get');
+
+      if (!name || !email || !attendance) {
+        throw new Error('Missing required fields: name, email, and attendance are required.');
+      }
+
+      sheet.appendRow([
+        timestamp,
+        name,
+        email,
+        attendance,
+        guests,
+        arrivalDate,
+        dietary,
+        source,
+      ]);
+
+      return buildResponse({ result: 'success', message: 'RSVP stored via GET fallback.' });
+    }
+
+    return buildResponse({
+      result: 'ok',
+      message: 'Wedding RSVP endpoint is live.',
+      sheet: SHEET_NAME,
+    });
+  } catch (err) {
+    return buildResponse({ result: 'error', error: err.message }, true);
+  }
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -132,6 +173,16 @@ function firstDefined() {
   }
   return '';
 }
+
+/**
+ * Returns true if value is non-empty after sanitize.
+ * @param {string|undefined} value
+ * @returns {boolean}
+ */
+function hasValue(value) {
+  return sanitize(value) !== '';
+}
+
 
 /**
  * Validate required script configuration.

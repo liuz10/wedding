@@ -51,21 +51,23 @@ export default function RSVP() {
       setStatus('success');
       return;
     }
+    if (SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
+      console.error('VITE_GOOGLE_SCRIPT_URL is still using placeholder value.');
+      setStatus('error');
+      return;
+    }
 
     setStatus('submitting');
     try {
-      const payload = new FormData();
-      Object.entries(form).forEach(([k, v]) => payload.append(k, v));
+      const endpoint = new URL(SCRIPT_URL);
+      Object.entries(form).forEach(([k, v]) => endpoint.searchParams.set(k, v));
+      endpoint.searchParams.set('source', 'website');
 
-      const res = await fetch(SCRIPT_URL, { method: 'POST', body: payload });
-      const json = await res.json();
-
-      if (json.result === 'success') {
-        setStatus('success');
-        setForm(INITIAL);
-      } else {
-        throw new Error(json.error || 'Unknown error');
-      }
+      // GET beacon fallback is more reliable across Apps Script deployments
+      // where browser POSTs may redirect to non-JSON error pages.
+      await fetch(endpoint.toString(), { method: 'GET', mode: 'no-cors' });
+      setStatus('success');
+      setForm(INITIAL);
     } catch (err) {
       console.error('RSVP submission error:', err);
       setStatus('error');
