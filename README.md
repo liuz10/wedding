@@ -78,6 +78,7 @@ The RSVP form posts data to a Google Apps Script Web App, which writes each resp
 2. Delete the default code and paste the entire contents of `google-apps-script/Code.gs`.
 3. Replace `YOUR_GOOGLE_SHEET_ID_HERE` with your Sheet ID from Step 1.
 4. Click **Save** (💾) and give the project a name (e.g., "Wedding RSVP").
+5. (Optional) Rename `SHEET_NAME` if you want a different tab name than `RSVPs`.
 
 ### Step 3 – Deploy as a Web App
 
@@ -91,14 +92,36 @@ The RSVP form posts data to a Google Apps Script Web App, which writes each resp
 5. Copy the **Web app URL** — it looks like:  
    `https://script.google.com/macros/s/AKfyc.../exec`
 
-### Step 4 – Add the URL to your project
+### Step 4 – Verify the endpoint
+
+Open the URL in your browser. You should see JSON similar to:
+
+```json
+{
+  "result": "ok",
+  "message": "Wedding RSVP endpoint is live.",
+  "sheet": "RSVPs",
+  "status": "ok"
+}
+```
+
+### Step 5 – Add the URL to your project
 
 ```bash
 # In your .env file:
 VITE_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
 ```
 
+For GitHub Actions/production deploys, also set a repository secret:
+
+- Name: `VITE_GOOGLE_SCRIPT_URL`
+- Value: your deployed Apps Script URL
+
 > **Note:** Every time you modify `Code.gs`, create a **new deployment version** (Deploy → Manage deployments → Edit → New version). The URL stays the same.
+
+The script stores these fields in Google Sheets:
+
+`Timestamp`, `Name`, `Email`, `Attendance`, `Guests`, `Arrival Date`, `Dietary Restrictions`, `Source`
 
 ---
 

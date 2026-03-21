@@ -1,21 +1,13 @@
 /**
  * Wedding RSVP – Google Apps Script Backend
  *
- * Deploy as a Web App:
- *   1. Open https://script.google.com and create a new project.
- *   2. Paste this entire file into the editor.
- *   3. Replace SHEET_ID with your Google Sheet ID (the long string in the Sheet URL).
- *   4. Click "Deploy" → "New deployment" → Type: "Web app".
- *   5. Set "Execute as" to yourself and "Who has access" to "Anyone".
- *   6. Copy the deployment URL and add it to your .env file as VITE_GOOGLE_SCRIPT_URL.
- *
- * The Sheet should have these columns in Row 1:
- *   Timestamp | Name | Email | Attendance | Guests | Dietary Restrictions
+ * Sheet columns (Row 1):
+ *   Timestamp | Name | Email | Attendance | Guests | Arrival Date | Dietary Restrictions | Source
  */
 
 // ── Configuration ────────────────────────────────────────────────────────────
 var SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; // Replace with your Sheet ID
-var SHEET_NAME = 'RSVPs';                    // Tab name inside the spreadsheet
+var SHEET_NAME = 'RSVPs';                   // Tab name inside the spreadsheet
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
@@ -25,16 +17,33 @@ var SHEET_NAME = 'RSVPs';                    // Tab name inside the spreadsheet
  */
 function doPost(e) {
   try {
+    validateConfig();
     var sheet = getOrCreateSheet();
+    var payload = parsePayload(e);
 
-    var timestamp  = new Date().toISOString();
-    var name       = sanitize(e.parameter.name);
-    var email      = sanitize(e.parameter.email);
-    var attendance = sanitize(e.parameter.attendance);
-    var guests     = sanitize(e.parameter.guests);
-    var dietary    = sanitize(e.parameter.dietary);
+    var timestamp = new Date().toISOString();
+    var name = sanitize(payload.name);
+    var email = sanitize(payload.email);
+    var attendance = sanitize(payload.attendance);
+    var guests = sanitize(payload.guests);
+    var arrivalDate = sanitize(payload.arrivalDate);
+    var dietary = sanitize(payload.dietary);
+    var source = sanitize(payload.source || 'website');
 
-    sheet.appendRow([timestamp, name, email, attendance, guests, dietary]);
+    if (!name || !email || !attendance) {
+      throw new Error('Missing required fields: name, email, and attendance are required.');
+    }
+
+    sheet.appendRow([
+      timestamp,
+      name,
+      email,
+      attendance,
+      guests,
+      arrivalDate,
+      dietary,
+      source,
+    ]);
 
     return buildResponse({ result: 'success' });
   } catch (err) {
@@ -47,7 +56,11 @@ function doPost(e) {
  * @returns {GoogleAppsScript.Content.TextOutput}
  */
 function doGet() {
-  return buildResponse({ result: 'ok', message: 'Wedding RSVP endpoint is live.' });
+  return buildResponse({
+    result: 'ok',
+    message: 'Wedding RSVP endpoint is live.',
+    sheet: SHEET_NAME,
+  });
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -57,27 +70,90 @@ function doGet() {
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 function getOrCreateSheet() {
-  var ss    = SpreadsheetApp.openById(SHEET_ID);
+  var ss = SpreadsheetApp.openById(SHEET_ID);
   var sheet = ss.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(['Timestamp', 'Name', 'Email', 'Attendance', 'Guests', 'Dietary Restrictions']);
-    sheet.getRange(1, 1, 1, 6).setFontWeight('bold');
+    sheet.appendRow([
+      'Timestamp',
+      'Name',
+      'Email',
+      'Attendance',
+      'Guests',
+      'Arrival Date',
+      'Dietary Restrictions',
+      'Source',
+    ]);
+    sheet.getRange(1, 1, 1, 8).setFontWeight('bold');
   }
 
   return sheet;
 }
 
 /**
- * Wraps a JSON payload in a TextOutput with CORS headers.
+ * Supports FormData posts (e.parameter) and JSON body posts (e.postData.contents).
+ * @param {GoogleAppsScript.Events.DoPost} e
+ * @returns {Object}
+ */
+function parsePayload(e) {
+  var fromForm = e && e.parameter ? e.parameter : {};
+  var raw = e && e.postData && e.postData.contents ? e.postData.contents : '';
+  var fromJson = {};
+
+  if (raw) {
+    try {
+      fromJson = JSON.parse(raw);
+    } catch (_ignore) {
+      fromJson = {};
+    }
+  }
+
+  return {
+    name: firstDefined(fromForm.name, fromJson.name),
+    email: firstDefined(fromForm.email, fromJson.email),
+    attendance: firstDefined(fromForm.attendance, fromJson.attendance),
+    guests: firstDefined(fromForm.guests, fromJson.guests),
+    arrivalDate: firstDefined(fromForm.arrivalDate, fromJson.arrivalDate),
+    dietary: firstDefined(fromForm.dietary, fromJson.dietary),
+    source: firstDefined(fromForm.source, fromJson.source),
+  };
+}
+
+/**
+ * Returns the first non-null/undefined value.
+ * @returns {*}
+ */
+function firstDefined() {
+  for (var i = 0; i < arguments.length; i += 1) {
+    if (arguments[i] !== undefined && arguments[i] !== null) {
+      return arguments[i];
+    }
+  }
+  return '';
+}
+
+/**
+ * Validate required script configuration.
+ */
+function validateConfig() {
+  if (!SHEET_ID || SHEET_ID === 'YOUR_GOOGLE_SHEET_ID_HERE') {
+    throw new Error('SHEET_ID is not configured. Replace YOUR_GOOGLE_SHEET_ID_HERE first.');
+  }
+}
+
+/**
+ * Wraps a JSON payload in a TextOutput.
  * @param {Object} payload
  * @param {boolean} [isError]
  * @returns {GoogleAppsScript.Content.TextOutput}
  */
 function buildResponse(payload, isError) {
+  var body = Object.assign({}, payload, {
+    status: isError ? 'error' : 'ok',
+  });
   var output = ContentService
-    .createTextOutput(JSON.stringify(payload))
+    .createTextOutput(JSON.stringify(body))
     .setMimeType(ContentService.MimeType.JSON);
   return output;
 }
