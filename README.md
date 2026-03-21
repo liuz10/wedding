@@ -139,19 +139,22 @@ GoDaddy hosting serves static files — perfect for this site.
 
 ### Option C – GitHub Actions (CI/CD)
 
-Set up a workflow to auto-deploy on every push to `main`:
+Set up a workflow to build from `main` and publish to a protected `production` branch:
 
 ```yaml
-# .github/workflows/deploy.yml
-name: Deploy to GoDaddy
+# .github/workflows/deploy-main-to-production.yml
+name: Deploy main to production
 on:
   push:
     branches: [main]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -159,17 +162,18 @@ jobs:
       - run: npm run build
         env:
           VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL }}
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Publish to production branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: /public_html/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: production
+          publish_dir: ./docs
 ```
 
-Add `VITE_GOOGLE_SCRIPT_URL`, `FTP_HOST`, `FTP_USER`, and `FTP_PASSWORD` to your repository secrets.
+Add `VITE_GOOGLE_SCRIPT_URL` to repository secrets, then set:
+- GitHub Pages source branch to `production` (root `/`)
+- Branch protection on `production` so direct pushes are blocked
+- Environment `production` reviewers for manual approval before deploy
 
 ### SPA Routing (important!)
 
