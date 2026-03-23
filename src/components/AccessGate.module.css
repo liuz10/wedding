@@ -1,0 +1,195 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.unlocking {
+  animation: unlockSlideUp 0.46s cubic-bezier(0.22, 0.8, 0.2, 1) forwards;
+}
+
+.centered {
+  width: min(100%, 780px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity, filter;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin: 0 auto 24px;
+}
+
+.hint {
+  font-family: 'Nunito', var(--font-sans);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.form {
+  width: min(92vw, 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.inlinePrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(75, 68, 57, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0 8px 0 10px;
+  width: min(100%, 220px);
+  min-width: 0;
+}
+
+.suffix {
+  color: #6c6c6c;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(108, 108, 108, 0.18);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.suffixLoading {
+  animation: suffixSpin 0.75s linear infinite;
+  background: rgba(143, 159, 69, 0.24);
+  color: var(--color-gold-dark);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 9px 6px 9px 0;
+  font-size: 0.95rem;
+  font-family: 'Nunito', var(--font-sans);
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.submitBtn {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.submitBtn:disabled {
+  opacity: 0;
+}
+
+.devWarning {
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  color: var(--color-error);
+  text-align: center;
+}
+
+.devWarning code {
+  background: rgba(0, 0, 0, 0.07);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.popupBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.popup {
+  width: min(90%, 280px);
+  background: var(--color-white);
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.popupTitle {
+  font-family: 'Nunito', var(--font-sans);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.retryBtn {
+  border: 1px solid var(--color-gold-dark);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-gold-dark);
+  padding: 7px 14px;
+  font-weight: 700;
+  font-family: 'Nunito', var(--font-sans);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .inputRow {
+    width: min(100%, 220px);
+  }
+}
+
+@keyframes suffixSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes unlockSlideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.985);
+    filter: blur(8px);
+    visibility: hidden;
+  }
+}
