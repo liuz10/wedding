@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import CeremonyImage from './components/CeremonyImage';
 import GettingThere from './components/GettingThere';
+import OurStory from './components/OurStory';
 import Details from './components/Details';
 import DressCode from './components/DressCode';
+import BookingInstructions from './components/BookingInstructions';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 import AccessGate from './components/AccessGate';
@@ -18,10 +19,11 @@ function InvitationContent() {
       <Header />
       <main>
         <Hero />
-        <CeremonyImage />
         <GettingThere />
+        <OurStory />
         <Details />
         <DressCode />
+        <BookingInstructions />
         <RSVP />
       </main>
       <Footer />

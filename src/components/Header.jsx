@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
 const navLinks = [
-  { label: 'Ceremony', href: '#ceremony-photo' },
+  { label: 'We are getting married', href: '#hero' },
   { label: 'Getting There', href: '#getting-there' },
+  { label: 'Our Story', href: '#our-story' },
   { label: 'Weekend Schedule', href: '#details' },
   { label: 'Dress Code', href: '#dress-code' },
+  { label: 'Booking Instructions', href: '#booking-instructions' },
   { label: 'RSVP', href: '#rsvp' },
 ];
 

@@ -126,10 +126,10 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
                 disabled={isSubmitting || !validateUrl}
               />
               <span
-                className={`${styles.suffix} ${isSubmitting ? styles.suffixLoading : ''}`}
+                className={styles.suffix}
                 aria-hidden="true"
               >
-                {isSubmitting ? '⟳' : '↑'}
+                {isSubmitting ? <span className={styles.spinner} /> : '↑'}
               </span>
             </span>
           </label>

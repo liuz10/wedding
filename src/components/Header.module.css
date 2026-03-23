@@ -39,52 +39,73 @@
 }
 
 .nav {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(82vw, 300px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(75, 68, 57, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(75, 68, 57, 0.16);
+  padding: 10px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  z-index: 105;
+  transform-origin: top right;
+  animation: navFadeIn 0.2s ease-out;
+}
+
+.navOpen {
   display: flex;
-  align-items: center;
-  gap: 32px;
 }
 
 .navLink {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-light);
-  transition: color 0.2s;
-  position: relative;
-}
-
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-gold);
-  transform: scaleX(0);
-  transition: transform 0.25s ease;
+  transition: color 0.2s, background-color 0.2s;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
 }
 
 .navLink:hover {
   color: var(--color-text);
-}
-
-.navLink:hover::after {
-  transform: scaleX(1);
+  background: rgba(184, 196, 106, 0.18);
 }
 
 .navCta {
-  display: none; /* hidden in nav — shown in full nav only on mobile */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--color-gold);
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  transition: background 0.2s, color 0.2s;
 }
 
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 24px;
-  height: 18px;
+  width: 28px;
+  height: 22px;
   background: none;
   border: none;
   cursor: pointer;
@@ -94,28 +115,24 @@
 
 .hamburger span {
   display: block;
-  height: 2px;
+  height: 2.5px;
   width: 100%;
   background: var(--color-text);
-  border-radius: 2px;
+  border-radius: 999px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .hamburgerOpen span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(9.5px) rotate(42deg);
 }
 .hamburgerOpen span:nth-child(2) {
   opacity: 0;
 }
 .hamburgerOpen span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-9.5px) rotate(-42deg);
 }
 
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
   .nav {
     position: fixed;
     top: 0;
@@ -131,6 +148,10 @@
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 105;
+    display: flex;
+    border: none;
+    border-radius: 0;
+    animation: none;
   }
 
   .navOpen {
@@ -140,26 +161,21 @@
   .navLink {
     font-size: 1rem;
     letter-spacing: 0.12em;
+    width: auto;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
   }
+}
 
-  .navCta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 28px;
-    border: 1px solid var(--color-gold);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-gold-dark);
-    transition: background 0.2s, color 0.2s;
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
   }
-
-  .navCta:hover {
-    background: var(--color-gold);
-    color: var(--color-white);
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
