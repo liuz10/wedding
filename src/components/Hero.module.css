@@ -4,49 +4,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, var(--color-blush-light) 0%, var(--color-cream) 50%, var(--color-cream-dark) 100%);
+  background: #101010;
   overflow: hidden;
   padding: 120px 24px 100px;
 }
 
-/* ── Decorative corner elements ── */
-.petalTopLeft,
-.petalTopRight,
-.petalBottomLeft,
-.petalBottomRight {
+.backdrop {
   position: absolute;
-  width: clamp(160px, 25vw, 320px);
-  height: clamp(160px, 25vw, 320px);
-  border-radius: 50%;
-  opacity: 0.18;
+  inset: -20px;
+  background-image: var(--hero-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(6.4px) saturate(0.95);
+  transform: scale(1.05);
   pointer-events: none;
 }
 
-.petalTopLeft {
-  top: -60px;
-  left: -60px;
-  background: radial-gradient(circle, var(--color-blush) 0%, transparent 70%);
+.backdrop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.18) 0%,
+    rgba(20, 20, 20, 0.38) 50%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
 }
 
-.petalTopRight {
-  top: -40px;
-  right: -40px;
-  background: radial-gradient(circle, var(--color-gold-light) 0%, transparent 70%);
-}
-
-.petalBottomLeft {
-  bottom: -40px;
-  left: -40px;
-  background: radial-gradient(circle, var(--color-gold-light) 0%, transparent 70%);
-}
-
-.petalBottomRight {
-  bottom: -60px;
-  right: -60px;
-  background: radial-gradient(circle, var(--color-blush) 0%, transparent 70%);
-}
-
-/* ── Content ── */
 .content {
   position: relative;
   z-index: 1;
@@ -54,21 +39,12 @@
   max-width: 900px;
 }
 
-.preTitle {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 32px;
-}
-
 .mainTitle {
   font-family: var(--font-serif);
   font-size: clamp(2.8rem, 7vw, 5.2rem);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-white);
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
   line-height: 1.08;
   margin-bottom: 10px;
 }
@@ -76,7 +52,8 @@
 .coupleName {
   font-family: var(--font-serif);
   font-size: clamp(1.4rem, 3.4vw, 2.2rem);
-  color: var(--color-text-light);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
   margin-bottom: 20px;
 }
 
@@ -93,28 +70,27 @@
   display: block;
   width: 80px;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-gold));
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.75));
 }
 
 .dividerLine:last-child {
-  background: linear-gradient(to left, transparent, var(--color-gold));
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.75));
 }
 
 .dividerFlower {
-  color: var(--color-gold);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1rem;
 }
 
-/* ── Body text ── */
 .invite {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--color-text-light);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
   margin-bottom: 44px;
 }
 
-/* ── Date / Location ── */
 .details {
   display: flex;
   align-items: center;
@@ -137,22 +113,27 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-gold-dark);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .detailValue {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: var(--color-text);
+  color: var(--color-white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
 }
 
 .detailSep {
-  color: var(--color-gold);
-  font-size: 0.8rem;
-  padding-top: 4px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  padding-top: 0;
 }
 
-/* ── CTA button ── */
 .cta {
   display: inline-block;
   padding: 14px 48px;

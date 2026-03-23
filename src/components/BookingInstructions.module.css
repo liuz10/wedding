@@ -1,0 +1,11 @@
+.section {
+  background: var(--color-cream);
+}
+
+.placeholder {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 1.05rem;
+}

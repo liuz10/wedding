@@ -6,8 +6,8 @@ const events = [
     title: 'Day 1 · Welcome Sunset Sailing Party',
     time: 'Sunset',
     venue: 'Welcome Boat Sailing Party',
-    address: 'Marina Departure Dock',
-    city: 'San Francisco, CA',
+    address: 'Manele Harbor',
+    city: 'Lanai, Hawaii',
     note: 'Kick off the wedding weekend with golden-hour views on the water.',
   },
   {
@@ -15,8 +15,8 @@ const events = [
     title: 'Day 2 · Wedding Day',
     time: 'Ceremony · Reception · After Party',
     venue: 'Wedding Celebration',
-    address: 'Ceremony & Reception Venue',
-    city: 'San Francisco, CA',
+    address: 'Four Seasons Resort Lanai',
+    city: 'Lanai, Hawaii',
     note: 'Our main celebration day with vows, dinner, dancing, and a late-night after party.',
   },
   {
@@ -24,8 +24,8 @@ const events = [
     title: 'Day 3 · Farewell Brunch',
     time: 'Late Morning',
     venue: 'Farewell Brunch',
-    address: 'Brunch Venue',
-    city: 'San Francisco, CA',
+    address: 'Resort Brunch Terrace',
+    city: 'Lanai, Hawaii',
     note: 'One final meal together before we send everyone off with love.',
   },
 ];
@@ -45,7 +45,7 @@ export default function Details() {
           </figure>
           <figure className={styles.featureCard}>
             <img src="/docs/images/glance-1.jpg" alt="Scenic city and water view for wedding weekend atmosphere" loading="lazy" />
-            <figcaption>Weekend Views · San Francisco</figcaption>
+            <figcaption>Weekend Views · Lanai</figcaption>
           </figure>
         </div>
 

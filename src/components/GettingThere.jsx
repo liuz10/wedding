@@ -3,15 +3,15 @@ import styles from './GettingThere.module.css';
 const travelOptions = [
   {
     title: 'Fly In',
-    detail: 'Closest airports are SFO and OAK. We recommend arriving by Thursday evening.',
+    detail: 'Fly into Honolulu (HNL), then take a short interisland flight to Lanai Airport (LNY).',
   },
   {
     title: 'Getting Around',
-    detail: 'Rideshare is easiest between venues. Public transit is also available across the city.',
+    detail: 'Resort and local shuttles are the easiest way to move between the airport, hotel, and venues.',
   },
   {
     title: 'Where to Stay',
-    detail: 'Hotel block details will be shared soon. Nearby neighborhoods: Marina, Nob Hill, and Union Square.',
+    detail: 'We recommend staying at Four Seasons Resort Lanai for the smoothest weekend experience.',
   },
 ];
 
