@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import dogImage from '../assets/Subject.png';
 import styles from './AccessGate.module.css';
 
@@ -24,11 +24,38 @@ function buildValidateUrl() {
   return endpoint.toString();
 }
 
+function useKeyboardViewportLock() {
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return undefined;
+
+    const apply = () => {
+      document.documentElement.style.setProperty('--gate-vv-height', `${viewport.height}px`);
+      document.documentElement.style.setProperty('--gate-vv-offset-top', `${viewport.offsetTop}px`);
+    };
+
+    apply();
+    viewport.addEventListener('resize', apply);
+    viewport.addEventListener('scroll', apply);
+    window.addEventListener('orientationchange', apply);
+
+    return () => {
+      viewport.removeEventListener('resize', apply);
+      viewport.removeEventListener('scroll', apply);
+      window.removeEventListener('orientationchange', apply);
+      document.documentElement.style.removeProperty('--gate-vv-height');
+      document.documentElement.style.removeProperty('--gate-vv-offset-top');
+    };
+  }, []);
+}
+
 export default function AccessGate({ isUnlocked, onUnlock }) {
   const [answer, setAnswer] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showFailPopup, setShowFailPopup] = useState(false);
   const [isUnlocking, setIsUnlocking] = useState(false);
+
+  useKeyboardViewportLock();
 
   const validateUrl = useMemo(() => buildValidateUrl(), []);
   const isHidden = isUnlocked && !isUnlocking;
@@ -112,7 +139,7 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
 
         <form onSubmit={handleValidate} className={styles.form}>
           <label htmlFor="gate-answer" className={styles.inlinePrompt}>
-            <span className={styles.hint}>What's my name?</span>
+            <span className={styles.hint}>What&apos;s my name?</span>
             <span className={styles.inputRow}>
               <input
                 id="gate-answer"

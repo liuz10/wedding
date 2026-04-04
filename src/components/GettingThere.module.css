@@ -1,49 +1,144 @@
 .section {
-  background: var(--color-cream);
+  background: var(--color-white);
   min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
-.intro {
-  text-align: center;
-  color: var(--color-text-light);
-  margin: 0 auto 38px;
-  max-width: 620px;
+/* ── Hero image ── */
+.heroImage {
+  display: block;
+  width: 100%;
+  max-width: 740px;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin: 0 auto 36px;
 }
 
-.grid {
+/* ── Card stack ── */
+.stack {
+  max-width: 740px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
+/* ── Card (static, not collapsible) ── */
 .card {
-  background: var(--color-white);
-  border: 1px solid var(--color-cream-dark);
-  border-radius: var(--radius-lg);
-  padding: 28px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(184, 196, 106, 0.3);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(250, 246, 240, 0.88)
+  );
   box-shadow: var(--shadow-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
+/* ── Step label ── */
+.stepLabel {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--color-gold-dark);
 }
 
-.card h3 {
-  font-size: 1.35rem;
-  margin-bottom: 10px;
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 2px 0 4px;
 }
 
-.card p {
+.cardDetail {
   color: var(--color-text-light);
-  line-height: 1.65;
+  font-size: 0.93rem;
+  line-height: 1.7;
+  max-width: 520px;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
+.cardDetail a,
+.footnote a {
+  color: var(--color-gold-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.cardDetail a:hover,
+.footnote a:hover {
+  color: var(--color-text);
+}
+
+/* ── Footnote ── */
+.footnote {
+  max-width: 740px;
+  margin: 28px auto 0;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  border-top: 1px dashed rgba(143, 159, 69, 0.35);
+  padding-top: 20px;
+}
+
+.footnote strong {
+  color: var(--color-text-light);
+}
+
+/* ── Mobile ── */
+@media (max-width: 680px) {
+  .heroImage {
+    max-height: 200px;
+    border-radius: 12px;
+    margin-bottom: 28px;
+  }
+
+  .stack {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 22px 20px 20px;
+    border-radius: 16px;
+  }
+
+  .stepLabel {
+    font-size: 0.95rem;
+  }
+
+  .cardTitle {
+    font-size: 1.15rem;
+  }
+
+  .cardDetail {
+    font-size: 0.9rem;
+  }
+
+  .footnote {
+    margin-top: 22px;
+    padding-top: 16px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 18px 16px;
+  }
+
+  .cardTitle {
+    font-size: 1.08rem;
   }
 }

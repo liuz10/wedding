@@ -31,7 +31,7 @@
   font-size: 0.875rem;
   font-weight: 300;
   letter-spacing: 0.14em;
-  color: var(--color-text-muted);
+  color: rgba(242, 239, 232, 0.7);
 }
 
 .tagline {
@@ -44,6 +44,6 @@
 .copy {
   margin-top: 8px;
   font-size: 0.78rem;
-  color: var(--color-text-muted);
+  color: rgba(242, 239, 232, 0.45);
   letter-spacing: 0.06em;
 }

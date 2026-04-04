@@ -19,11 +19,11 @@ function InvitationContent() {
       <Header />
       <main>
         <Hero />
-        <GettingThere />
-        <OurStory />
-        <Details />
-        <DressCode />
         <BookingInstructions />
+        <GettingThere />
+        <DressCode />
+        <Details />
+        <OurStory />
         <RSVP />
       </main>
       <Footer />

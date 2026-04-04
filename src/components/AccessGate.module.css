@@ -3,11 +3,13 @@
   inset: 0;
   z-index: 9999;
   background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush-light) 100%);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: max(20px, env(safe-area-inset-top)) 20px 20px;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: var(--gate-vv-height, 100svh);
+  padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  overflow: clip;
 }
 
 .unlocking {
@@ -19,9 +21,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   will-change: transform, opacity, filter;
-  margin-top: min(13vh, 96px);
 }
 
 .image {
@@ -172,15 +173,23 @@
 
 @media (max-width: 700px) {
   .overlay {
-    padding-bottom: max(18px, env(safe-area-inset-bottom));
+    place-items: start center;
+    padding-top: max(20px, env(safe-area-inset-top));
   }
 
   .centered {
-    margin-top: min(11vh, 80px);
+    margin-top: 72px;
+    justify-content: flex-start;
   }
 
   .inputRow {
     width: min(100%, 220px);
+  }
+}
+
+@media (min-width: 701px) {
+  .centered {
+    margin-top: 0;
   }
 }
 

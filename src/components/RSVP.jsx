@@ -6,16 +6,16 @@ const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 const INITIAL = {
   name: '',
   email: '',
-  attendance: '',
-  guests: '1',
-  arrivalDate: '',
-  dietary: '',
+  attendance: '',    // repurposed: arrival date
+  guests: '',        // repurposed: departure date
+  arrivalDate: '',   // repurposed: dietary restrictions
+  dietary: '',       // repurposed: notes / questions
 };
 
 export default function RSVP() {
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [status, setStatus] = useState('idle');
 
   const validate = () => {
     const e = {};
@@ -25,10 +25,8 @@ export default function RSVP() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       e.email = 'Please enter a valid email address.';
     }
-    if (!form.attendance) e.attendance = 'Please select your attendance.';
-    if (!form.guests || Number(form.guests) < 1 || Number(form.guests) > 6) {
-      e.guests = 'Please enter a number between 1 and 6.';
-    }
+    if (!form.attendance) e.attendance = 'Please select your arrival date.';
+    if (!form.guests) e.guests = 'Please select your departure date.';
     return e;
   };
 
@@ -65,7 +63,7 @@ export default function RSVP() {
       const endpoint = new URL(SCRIPT_URL);
       Object.entries(form).forEach(([k, v]) => endpoint.searchParams.set(k, v));
       endpoint.searchParams.set('source', 'website');
-      endpoint.searchParams.set('_ts', `${Date.now()}`);
+      endpoint.searchParams.set('_ts', String(Date.now()));
 
       await fetch(endpoint.toString(), {
         method: 'GET',
@@ -89,7 +87,7 @@ export default function RSVP() {
             <span className={styles.successIcon} aria-hidden="true">✦</span>
             <h2 className={styles.successTitle}>Thank You!</h2>
             <p className={styles.successMsg}>
-              Your RSVP has been received. We can't wait to celebrate with you!
+              Your response has been received. We can’t wait to celebrate with you!
             </p>
             <button className={styles.resetBtn} onClick={() => setStatus('idle')}>
               Submit Another Response
@@ -103,14 +101,19 @@ export default function RSVP() {
   return (
     <section id="rsvp" className={styles.section}>
       <div className="container">
-        <p className="section-subtitle">Kindly Reply By August 1, 2025</p>
-        <h2 className="section-title">RSVP</h2>
+        <p className="section-subtitle">Let Us Know</p>
+        <h2 className="section-title">Travel Details</h2>
         <div className="section-divider"><span>✦</span></div>
+
+        <p className={styles.intro}>
+          We’re so excited to have you! Please share your travel dates so we can
+          help coordinate transportation and plan the weekend.
+        </p>
 
         {!SCRIPT_URL && (
           <div className={styles.devNotice} role="alert">
-            ⚠️ <strong>Development mode:</strong> Set <code>VITE_GOOGLE_SCRIPT_URL</code> in your{' '}
-            <code>.env</code> file to enable form submission.
+            ⚠️ <strong>Development mode:</strong> Set <code>VITE_GOOGLE_SCRIPT_URL</code> in
+            your <code>.env</code> file to enable form submission.
           </div>
         )}
 
@@ -153,35 +156,34 @@ export default function RSVP() {
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="rsvp-attendance" className={styles.label}>
-                Attendance <span aria-hidden="true">*</span>
+              <label htmlFor="rsvp-arrival" className={styles.label}>
+                Arrival Date <span aria-hidden="true">*</span>
               </label>
-              <select
-                id="rsvp-attendance"
+              <input
+                id="rsvp-arrival"
+                type="date"
                 name="attendance"
                 value={form.attendance}
                 onChange={handleChange}
-                className={`${styles.select} ${errors.attendance ? styles.inputError : ''}`}
-              >
-                <option value="">— Please select —</option>
-                <option value="Attending">Joyfully Accepts</option>
-                <option value="Not Attending">Regretfully Declines</option>
-              </select>
+                min="2026-08-05"
+                max="2026-08-10"
+                className={`${styles.input} ${errors.attendance ? styles.inputError : ''}`}
+              />
               {errors.attendance && <span className={styles.error} role="alert">{errors.attendance}</span>}
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="rsvp-guests" className={styles.label}>
-                Number of Guests
+              <label htmlFor="rsvp-departure" className={styles.label}>
+                Departure Date <span aria-hidden="true">*</span>
               </label>
               <input
-                id="rsvp-guests"
-                type="number"
+                id="rsvp-departure"
+                type="date"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
-                min="1"
-                max="6"
+                min="2026-08-07"
+                max="2026-08-12"
                 className={`${styles.input} ${errors.guests ? styles.inputError : ''}`}
               />
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}
@@ -189,31 +191,31 @@ export default function RSVP() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="rsvp-arrival-date" className={styles.label}>
-              What date do you plan to arrive?
+            <label htmlFor="rsvp-dietary" className={styles.label}>
+              Dietary Restrictions
             </label>
             <input
-              id="rsvp-arrival-date"
+              id="rsvp-dietary"
               type="text"
               name="arrivalDate"
               value={form.arrivalDate}
               onChange={handleChange}
-              placeholder="Example: Thursday, October 16"
+              placeholder="Vegetarian, gluten-free, allergies, etc."
               className={styles.input}
             />
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="rsvp-dietary" className={styles.label}>
-              Dietary Restrictions / Special Requests
+            <label htmlFor="rsvp-notes" className={styles.label}>
+              Questions or Notes
             </label>
             <textarea
-              id="rsvp-dietary"
+              id="rsvp-notes"
               name="dietary"
               value={form.dietary}
               onChange={handleChange}
-              placeholder="Vegetarian, gluten-free, allergies, etc."
-              rows={4}
+              placeholder="Anything else you'd like us to know?"
+              rows={3}
               className={styles.textarea}
             />
           </div>
@@ -229,7 +231,7 @@ export default function RSVP() {
             className={styles.submitBtn}
             disabled={status === 'submitting'}
           >
-            {status === 'submitting' ? 'Sending…' : 'Send RSVP'}
+            {status === 'submitting' ? 'Sending…' : 'Submit'}
           </button>
         </form>
       </div>

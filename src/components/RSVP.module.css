@@ -24,6 +24,15 @@
   font-size: 0.82em;
 }
 
+.intro {
+  max-width: 680px;
+  margin: 0 auto 36px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
 .form {
   max-width: 680px;
   margin: 0 auto;
@@ -210,5 +219,22 @@
 
   .submitBtn {
     width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .input,
+  .select,
+  .textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .form {
+    gap: 18px;
+  }
+
+  .submitBtn {
+    padding: 12px 24px;
   }
 }

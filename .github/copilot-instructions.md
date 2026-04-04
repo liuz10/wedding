@@ -1,60 +1,119 @@
-# Copilot Working Instructions (Project Guardrails)
+# Copilot Instructions — Wedding Website
 
-## Non-negotiable invariants
+## Project Overview
 
-- Do **not** break RSVP backend connectivity.
-- Do **not** change the website's current primary color choices.
-- Do **not** change currently selected image assets.
-- If redesign work is requested, preserve existing color/image decisions unless the user explicitly approves changes.
-- After any redesign/refactor, verify the main theme colors and image selections are unchanged, and RSVP still works.
+This is Alice & Johnny's wedding website built with **React + Vite**, deployed via **GitHub Pages** to **www.aliceandjohnnywedding.com**. The site serves as the single source of truth for wedding guests — it must be polished, clear, and professional at all times.
 
-## Branching and merge workflow
+### 🎯 Primary Goal
 
-- Always create a new branch for new changes.
-- Verify implementation works as expected before merge.
-- Merge into `main` only after verification.
-- Delete merged working branches (local + remote) after merge.
+The website must **look and work beautifully on both desktop and mobile**. Most guests will view it on their **iPhone**, so mobile experience is the top priority. Every feature, layout change, and design decision must be verified at mobile widths (375px–428px) before it's considered done.
 
-## Deployment logistics (current setup)
+---
 
-- GitHub Pages is served from:
-  - Branch: `production`
-  - Path: `/docs`
-  - Custom domain: `aliceandjohnnywedding.com`
-- Deploy workflow: `.github/workflows/deploy-main-to-production.yml`
-  - Trigger: push/workflow_dispatch on `main`
-  - Requires `production` environment approval
-  - Builds with `npm run build`
-  - Force-syncs `main` commit to `production`
+## Non-Negotiable Rules
 
-## Critical note about production build input
+1. **Never break the deployed website.** Production is live at www.aliceandjohnnywedding.com. Any change that could break it must be tested thoroughly before merging.
+2. **Do not change primary color choices** unless explicitly approved.
+3. **Do not swap or remove image assets** unless explicitly approved.
+4. **Do not break RSVP backend connectivity.** The RSVP form submits to a Google Apps Script endpoint — this must always work.
+5. **Mobile-first mindset.** All UI changes must be tested at iPhone widths (375px, 390px, 428px). Include breakpoints for small phones (380px) and standard mobile (640px–680px).
+6. **After any change, run `npm run build`** to verify the build passes before committing.
 
-- Because deployment syncs source from `main` to `production`, production serves the committed `docs/` artifacts in the repo.
-- This means changing GitHub secret alone is **not enough** if `docs/` still contains old values.
-- Before each production deployment that affects env-injected frontend values (like `VITE_GOOGLE_SCRIPT_URL`), **rebuild and commit `docs/` on `main`**:
+---
 
-```bash
-# ensure correct local env first
-npm run build
-git add docs
-git commit -m "Rebuild docs for production"
-git push origin main
+## Branching & Workflow
+
+### Adding a New Feature or Making Changes
+1. **Create a branch off `main`** with a descriptive name (e.g., `feature/timeline-redesign`)
+2. Make changes and **commit incrementally** as you go — each commit should be meaningful
+3. **Do NOT merge to `main`** until the user has reviewed and approved
+4. After approval, merge the branch to `main`
+5. Delete the merged branch (local + remote)
+
+### Deploying to Production
+1. Ensure all changes are merged to `main` and the build is clean
+2. Rebuild docs if needed:
+   ```bash
+   npm run build
+   git add docs
+   git commit -m "Rebuild docs for production"
+   git push origin main
+   ```
+3. Use the **deploy workflow** (`.github/workflows/deploy-main-to-production.yml`):
+   - Trigger: push to `main` or manual workflow_dispatch
+   - Requires **production environment approval**
+   - Workflow builds with `npm run build`, then force-syncs `main` → `production` branch
+4. GitHub Pages serves the `production` branch from `/docs` directory
+
+### ⚠️ Critical Deployment Notes
+- The `docs/` directory is **committed to the repo** — GitHub Pages serves it directly from the `production` branch
+- Changing a GitHub secret alone is NOT enough if `docs/` still contains old build artifacts
+- **Always rebuild and commit `docs/` before deploying** when env-injected values change (e.g., `VITE_GOOGLE_SCRIPT_URL`)
+- The production branch should ONLY be updated via the deploy workflow — never push directly to it
+
+---
+
+## Architecture
+
+### Tech Stack
+- **Framework:** React 19 + Vite 8
+- **Styling:** CSS Modules (`.module.css` per component)
+- **Deployment:** GitHub Pages (production branch, /docs path)
+- **Domain:** www.aliceandjohnnywedding.com (CNAME)
+- **Backend:** Google Apps Script (RSVP form → Google Sheets)
+
+### Project Structure
+```
+src/
+  App.jsx                    # Main app with section ordering & access gate
+  index.css                  # Global styles, CSS custom properties
+  components/
+    AccessGate.jsx           # Passphrase-protected entry gate
+    Header.jsx               # Fixed nav with hamburger menu + RSVP CTA
+    Hero.jsx                 # Full-height hero with background image
+    BookingInstructions.jsx  # Hotel booking info
+    GettingThere.jsx         # Travel steps (static cards)
+    DressCode.jsx            # Style guide with inspiration images
+    Details.jsx              # Wedding Weekend Schedule (foldable cards with timeline)
+    OurStory.jsx             # Relationship timeline (winding roadmap)
+    RSVP.jsx                 # RSVP form with Google Sheets integration
+    Footer.jsx               # Dark footer with couple info
 ```
 
-Then trigger/approve deploy workflow.
+### Section Order (in App.jsx)
+Hero → BookingInstructions → GettingThere → DressCode → Details → OurStory → RSVP → Footer
 
-## Backend connection contract (RSVP)
+### Design System
+- **Fonts:** Playfair Display (serif headings), Lato (sans body)
+- **Colors:** Cream (#f2efe8), Blush (#f3d7dc), Gold (#b8c46a), Text (#4b4439)
+- **Card style:** 20px border-radius, gold-tinted borders, subtle gradients
+- **Content max-width:** 740px for most sections
+- **Spacing scale:** 8px, 12px, 16px, 20px, 24px, 28px, 32px
 
-- Frontend reads `VITE_GOOGLE_SCRIPT_URL`.
-- Local development uses local `.env` (ignored from git).
-- Production build uses value injected at build time; resulting URL is embedded in `docs/assets/*.js`.
-- Current RSVP submit path uses a GET request to Apps Script `/exec` with query params and `source=website`.
-- Apps Script must accept:
-  - `name`, `email`, `attendance`, `guests`, `arrivalDate`, `dietary`, `source`
+### RSVP Backend Contract
+- Frontend reads `VITE_GOOGLE_SCRIPT_URL` from environment
+- Local dev uses `.env` (gitignored); production uses build-time injection
+- Submit uses GET request to Apps Script `/exec` with query params
+- Required fields: `name`, `email`, `attendance`, `guests`, `arrivalDate`, `dietary`, `source`
 
-## Required checks before closing tasks
+---
 
-- Local RSVP submit creates a new row in Google Sheet.
-- Production bundle contains expected Apps Script script ID (inspect live `index-*.js` when needed).
-- No accidental edits to colors/images unless explicitly requested.
-- No deployment triggers unless user asks.
+## Style Guidelines
+
+- **Border-radius:** 20px for cards, 16px for images, 12px on mobile
+- **Gaps:** 20px for card stacks, 16px for inner content
+- **Padding:** 28px for cards (desktop), 20px (mobile), 16px (small phones)
+- **Sections use `min-height: 100vh` with `display: flex; align-items: center`**
+- All interactive elements need `cursor: pointer`, `:focus-visible` styles, and proper `aria-*` attributes
+- Use CSS `clamp()` for responsive typography where possible
+
+---
+
+## Required Checks Before Closing Any Task
+
+- [ ] `npm run build` passes with no errors
+- [ ] Changes look correct at desktop width (1200px+)
+- [ ] Changes look correct at iPhone width (375px–428px)
+- [ ] RSVP form still submits correctly (if touching RSVP or env config)
+- [ ] No accidental edits to colors/images unless explicitly requested
+- [ ] No deployment triggered unless user explicitly asks

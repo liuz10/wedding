@@ -49,6 +49,7 @@ body {
   background-color: var(--color-cream);
   color: var(--color-text);
   line-height: 1.7;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -81,13 +82,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 300;
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--color-text-muted);
   text-align: center;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .section-divider {
@@ -95,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin: 0 auto 60px;
+  margin: 0 auto 52px;
   max-width: 300px;
 }
 
@@ -145,12 +146,28 @@ section {
 /* ── Responsive ── */
 @media (max-width: 768px) {
   :root {
-    --section-padding: 70px 20px;
+    --section-padding: 68px 20px;
+  }
+
+  .section-divider {
+    margin-bottom: 42px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --section-padding: 56px 16px;
+    --section-padding: 54px 16px;
+  }
+
+  body {
+    line-height: 1.65;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .section-divider {
+    margin-bottom: 36px;
   }
 }

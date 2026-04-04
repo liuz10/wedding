@@ -10,12 +10,16 @@ export default function DressCode() {
 
         <div className={styles.content}>
           <div className={styles.copy}>
-            <p className={styles.lead}>Black tie event</p>
-            <p>Men: suits are welcome, but please avoid black.</p>
-            <p>Ladies: elegant eveningwear encouraged.</p>
+            <p className={styles.lead}>Formal Attire Requested</p>
+            <p>
+              Suits and elegant dresses are warmly encouraged, and to keep photos cohesive we kindly ask
+              guests to avoid black and white (reserved for the couple) as well as very bright or neon
+              shades; beautiful options include jewel tones, muted earth tones, champagne, sage, navy,
+              plum, and dusty rose.
+            </p>
           </div>
 
-          <div className={styles.images}>
+          <div className={styles.imageRail}>
             <img src="/docs/images/dresscode-guide.png" alt="Dress code inspiration board" loading="lazy" />
             <img src="/docs/images/dresscode-ladies.webp" alt="Ladies dress inspiration" loading="lazy" />
           </div>

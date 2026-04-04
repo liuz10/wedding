@@ -33,10 +33,6 @@ export default function Hero() {
             <span className={styles.detailValue}>Lanai Four Season Resort</span>
           </div>
         </div>
-
-        <a href="#rsvp" className={styles.cta}>
-          RSVP Now
-        </a>
       </div>
     </section>
   );

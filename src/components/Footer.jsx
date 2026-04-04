@@ -12,7 +12,7 @@ export default function Footer() {
 
         <div className={styles.divider} aria-hidden="true">✦</div>
 
-        <p className={styles.date}>October 18, 2025 · San Francisco, CA</p>
+        <p className={styles.date}>August 8th, 2026 · Four Seasons Resort Lānaʻi</p>
 
         <p className={styles.tagline}>
           Two souls, one love, one beautiful beginning.

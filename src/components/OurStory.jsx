@@ -7,9 +7,9 @@ const keyMoments = [
   { year: '2019', note: 'We met!', className: 'point2019' },
   {
     year: '2020',
-    note: 'Our kid (William) is born!',
+    note: 'Our dog William is born!',
     photo: williamPhoto,
-    alt: 'William as a puppy',
+    alt: 'William the dog',
     className: 'point2020a',
   },
   { year: '2020', note: 'Alice moved to Chicago!', className: 'point2020b' },
@@ -38,21 +38,38 @@ export default function OurStory() {
 
         <p className={styles.storyCopy}>
           Long story short, Johnny slid into Alice&apos;s DMs on Instagram in the hot summer of
-          2020, and fate started doing its thing. Alice moved to Chicago and the two began writing
+          2019, and fate started doing its thing. Alice moved to Chicago and the two began writing
           their story together — starting with a dog named William in year one, I know, that&apos;s
           pretty bold! Now in 2026, we&apos;re finally tying the knot and making it official. If
           you&apos;re reading this, you&apos;re part of the story now, and we can&apos;t wait to
           celebrate with you!
         </p>
 
-        <div className={styles.roadmap} aria-label="Our relationship timeline map">
+        <div className={styles.roadmap} aria-label="Our relationship timeline">
+          {/* Desktop winding path */}
           <svg
-            className={styles.route}
+            className={`${styles.route} ${styles.routeDesktop}`}
             viewBox="0 0 1000 900"
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <path d="M90 120 H370 Q440 120 440 190 V280 Q440 350 510 350 H790 Q860 350 860 420 V560 Q860 630 790 630 H270 Q200 630 200 700 V820" />
+            <path
+              className={styles.routePath}
+              d="M90 120 H370 Q440 120 440 190 V280 Q440 350 510 350 H790 Q860 350 860 420 V560 Q860 630 790 630 H270 Q200 630 200 700 V820"
+            />
+          </svg>
+
+          {/* Mobile winding path */}
+          <svg
+            className={`${styles.route} ${styles.routeMobile}`}
+            viewBox="0 0 360 1100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              className={styles.routePath}
+              d="M60 60 H280 Q320 60 320 100 V230 Q320 270 280 270 H80 Q40 270 40 310 V480 Q40 520 80 520 H280 Q320 520 320 560 V720 Q320 760 280 760 H200 Q160 760 160 800 V960"
+            />
           </svg>
 
           {keyMoments.map(({ year, note, photo, alt, className, highlight }) => (
@@ -65,12 +82,11 @@ export default function OurStory() {
                   <img src={photo} alt={alt} loading="lazy" />
                 </figure>
               )}
-              <div className={styles.yearPill}>{year}</div>
-              <div className={styles.connector} aria-hidden="true">
-                <span className={styles.dotLine} />
-                <span className={styles.arrow}>➜</span>
-                <span className={styles.dotLine} />
+              <div className={styles.marker}>
+                <span className={styles.markerDot} />
+                <span className={styles.connectorLine} />
               </div>
+              <div className={styles.yearPill}>{year}</div>
               <p className={styles.note}>{note}</p>
             </article>
           ))}

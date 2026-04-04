@@ -1,7 +1,8 @@
 .section {
-  background: var(--color-blush-light);
+  background: var(--color-white);
 }
 
+/* ── Profile photos ── */
 .photoRow {
   display: flex;
   justify-content: center;
@@ -32,14 +33,19 @@
   color: var(--color-text);
 }
 
+/* ── Story text ── */
 .storyCopy {
-  max-width: 860px;
+  max-width: 740px;
   margin: 0 auto 48px;
   text-align: center;
   color: var(--color-text-light);
   font-size: 1.05rem;
+  line-height: 1.75;
 }
 
+/* ═══════════════════════════════════════
+   ROADMAP — winding path at all sizes
+   ═══════════════════════════════════════ */
 .roadmap {
   position: relative;
   height: 980px;
@@ -47,6 +53,7 @@
   margin: 0 auto;
 }
 
+/* SVG route layer */
 .route {
   position: absolute;
   inset: 0;
@@ -54,14 +61,20 @@
   height: 100%;
 }
 
-.route path {
+.routePath {
   fill: none;
   stroke: var(--color-gold-dark);
-  stroke-width: 5;
+  stroke-width: 4;
   stroke-linecap: round;
   stroke-dasharray: 8 10;
 }
 
+/* Toggle desktop vs mobile SVG */
+.routeMobile {
+  display: none;
+}
+
+/* ── Timeline items (absolute) ── */
 .timelineItem {
   position: absolute;
   width: 170px;
@@ -71,6 +84,37 @@
   text-align: center;
 }
 
+/* ── Marker: dot + dotted connector ── */
+.marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.markerDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-gold-dark);
+  border: 3px solid var(--color-white);
+  box-shadow: 0 0 0 2px var(--color-gold-dark);
+  flex-shrink: 0;
+}
+
+.connectorLine {
+  width: 2px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-gold-dark) 0px,
+    var(--color-gold-dark) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* ── Year pill ── */
 .yearPill {
   min-width: 104px;
   padding: 7px 16px;
@@ -81,23 +125,7 @@
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: 0.06em;
-}
-
-.connector {
-  margin: 14px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dotLine {
-  width: 24px;
-  border-top: 2px dotted var(--color-gold-dark);
-}
-
-.arrow {
-  color: var(--color-gold-dark);
-  font-size: 1.1rem;
+  margin-bottom: 6px;
 }
 
 .note {
@@ -106,11 +134,12 @@
   font-style: italic;
   font-size: 1rem;
   max-width: 170px;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
+/* ── Event photo circle ── */
 .eventCircle {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .eventCircle img {
@@ -122,6 +151,7 @@
   box-shadow: 0 3px 10px rgba(143, 159, 69, 0.24);
 }
 
+/* ── Desktop positions ── */
 .point2019 {
   left: 40px;
   top: 36px;
@@ -129,7 +159,7 @@
 
 .point2020a {
   left: 390px;
-  top: 255px;
+  top: 225px;
 }
 
 .point2020b {
@@ -139,23 +169,34 @@
 
 .point2025 {
   left: 612px;
-  top: 583px;
+  top: 560px;
 }
 
 .point2026 {
-  left: 180px;
-  top: 762px;
+  left: 150px;
+  top: 740px;
 }
 
+/* ── Highlight state ── */
 .highlight .yearPill {
   background: var(--color-gold-light);
-  box-shadow: 0 0 0 7px rgba(184, 196, 106, 0.36);
+  box-shadow: 0 0 0 6px rgba(184, 196, 106, 0.3);
+}
+
+.highlight .markerDot {
+  width: 18px;
+  height: 18px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-dark), 0 0 12px rgba(184, 196, 106, 0.4);
 }
 
 .highlight .note {
   font-weight: 700;
 }
 
+/* ═══════════════════════════════════════
+   TABLET (≤980px)
+   ═══════════════════════════════════════ */
 @media (max-width: 980px) {
   .roadmap {
     height: 900px;
@@ -173,7 +214,7 @@
 
   .point2020a {
     left: 300px;
-    top: 220px;
+    top: 200px;
   }
 
   .point2020b {
@@ -183,35 +224,50 @@
 
   .point2025 {
     left: 500px;
-    top: 535px;
+    top: 510px;
   }
 
   .point2026 {
     left: 130px;
-    top: 700px;
+    top: 680px;
   }
 }
 
+/* ═══════════════════════════════════════
+   MOBILE (≤640px): winding path scaled
+   ═══════════════════════════════════════ */
 @media (max-width: 640px) {
   .photoRow {
-    gap: 14px;
-    justify-content: center;
+    gap: 28px;
   }
 
   .profileCircle img {
-    width: 132px;
-    height: 132px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .storyCopy {
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+  }
+
+  /* Switch SVG paths */
+  .routeDesktop {
+    display: none;
+  }
+
+  .routeMobile {
+    display: block;
+  }
+
+  .routePath {
+    stroke-width: 3.5;
+    stroke-dasharray: 6 9;
   }
 
   .roadmap {
-    height: 880px;
+    height: 1060px;
     max-width: 360px;
-    margin: 0 auto;
-  }
-
-  .route path {
-    stroke-width: 4;
-    stroke-dasharray: 6 9;
   }
 
   .timelineItem {
@@ -222,15 +278,20 @@
     min-width: 84px;
     padding: 6px 12px;
     font-size: 0.86rem;
+    border-width: 2.5px;
   }
 
-  .connector {
-    margin: 10px 0;
-    gap: 6px;
+  .marker {
+    margin-bottom: 6px;
   }
 
-  .dotLine {
-    width: 16px;
+  .markerDot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .connectorLine {
+    height: 16px;
   }
 
   .note {
@@ -239,32 +300,97 @@
   }
 
   .eventCircle img {
-    width: 84px;
-    height: 84px;
+    width: 80px;
+    height: 80px;
   }
 
+  /* Mobile positions (matching mobile SVG path) */
   .point2019 {
-    left: 14px;
-    top: 12px;
+    left: 4px;
+    top: 0;
   }
 
   .point2020a {
     left: 190px;
-    top: 178px;
+    top: 168px;
   }
 
   .point2020b {
-    left: 204px;
-    top: 394px;
+    left: 4px;
+    top: 380px;
   }
 
   .point2025 {
-    left: 14px;
-    top: 520px;
+    left: 190px;
+    top: 548px;
   }
 
   .point2026 {
-    left: 98px;
-    top: 734px;
+    left: 80px;
+    top: 810px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   SMALL PHONES (≤380px)
+   ═══════════════════════════════════════ */
+@media (max-width: 380px) {
+  .photoRow {
+    gap: 20px;
+  }
+
+  .profileCircle img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .roadmap {
+    height: 980px;
+    max-width: 320px;
+  }
+
+  .timelineItem {
+    width: 118px;
+  }
+
+  .yearPill {
+    min-width: 76px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+  }
+
+  .note {
+    max-width: 118px;
+    font-size: 0.84rem;
+  }
+
+  .eventCircle img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .point2019 {
+    left: 2px;
+    top: 0;
+  }
+
+  .point2020a {
+    left: 168px;
+    top: 152px;
+  }
+
+  .point2020b {
+    left: 2px;
+    top: 348px;
+  }
+
+  .point2025 {
+    left: 168px;
+    top: 502px;
+  }
+
+  .point2026 {
+    left: 66px;
+    top: 744px;
   }
 }
