@@ -3,13 +3,13 @@
   inset: 0;
   z-index: 9999;
   background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush-light) 100%);
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
-  min-height: var(--gate-vv-height, 100svh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
-  overflow: clip;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .unlocking {
@@ -173,13 +173,18 @@
 
 @media (max-width: 700px) {
   .overlay {
-    place-items: start center;
+    justify-content: flex-start;
     padding-top: max(20px, env(safe-area-inset-top));
   }
 
   .centered {
-    margin-top: 72px;
+    margin-top: 18vh;
     justify-content: flex-start;
+  }
+
+  .image {
+    width: 160px;
+    height: 160px;
   }
 
   .inputRow {

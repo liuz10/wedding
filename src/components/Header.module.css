@@ -80,42 +80,59 @@
 }
 
 /* ═══════════════════════════════════════
-   FULL-SCREEN OVERLAY
+   FULL-SCREEN OVERLAY → SLIDE-IN PANEL
    ═══════════════════════════════════════ */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 199;
-  background: var(--color-cream);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
+  pointer-events: none;
 }
 
 .overlayOpen {
-  opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+}
+
+/* Backdrop dimmer */
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(75, 68, 57, 0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlayOpen::before {
+  opacity: 1;
 }
 
 /* ═══════════════════════════════════════
-   NAV LINKS (inside overlay)
+   NAV PANEL (slides from right)
    ═══════════════════════════════════════ */
 .nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 66vw;
+  max-width: 340px;
+  background: var(--color-cream);
+  box-shadow: -8px 0 32px rgba(75, 68, 57, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 28px;
-  transform: translateY(8px);
-  opacity: 0;
-  transition: transform 0.35s ease 0.05s, opacity 0.35s ease 0.05s;
+  padding: 80px 24px 40px;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .overlayOpen .nav {
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateX(0);
 }
 
 .navLink {
