@@ -143,6 +143,8 @@
   color: var(--color-text-light);
   transition: color 0.2s;
   padding: 4px 0;
+  text-align: center;
+  width: 100%;
 }
 
 .navLink:hover {
