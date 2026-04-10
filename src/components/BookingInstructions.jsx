@@ -28,6 +28,58 @@ export default function BookingInstructions() {
             </a>
           </div>
         </div>
+
+        <div className={styles.activitiesPanel}>
+          <h3 className={styles.activitiesTitle}>While You&apos;re Here</h3>
+          <p className={styles.activitiesCopy}>
+            L&#257;na&#699;i is a hidden gem with plenty to explore between celebrations.
+            Here are a few of our favorites:
+          </p>
+
+          <div className={styles.activityGrid}>
+            <div className={styles.activityCard}>
+              <span className={styles.activityEmoji} aria-hidden="true">&#127948;&#65039;</span>
+              <strong>Golf at Manele</strong>
+              <p>Championship course with ocean views on every hole.</p>
+              <a href="https://www.fourseasons.com/lanai/golf/" target="_blank" rel="noopener noreferrer">
+                Learn more &rarr;
+              </a>
+            </div>
+
+            <div className={styles.activityCard}>
+              <span className={styles.activityEmoji} aria-hidden="true">&#128134;</span>
+              <strong>Hawanawana Spa</strong>
+              <p>Oceanfront treatments inspired by Hawaiian healing traditions.</p>
+              <a href="https://www.fourseasons.com/lanai/spa/" target="_blank" rel="noopener noreferrer">
+                Learn more &rarr;
+              </a>
+            </div>
+
+            <div className={styles.activityCard}>
+              <span className={styles.activityEmoji} aria-hidden="true">&#127754;</span>
+              <strong>Snorkeling &amp; Diving</strong>
+              <p>Hulopoe Bay is home to reef fish, sea turtles, and spinner dolphins.</p>
+              <a href="https://www.fourseasons.com/lanai/experiences/" target="_blank" rel="noopener noreferrer">
+                Learn more &rarr;
+              </a>
+            </div>
+
+            <div className={styles.activityCard}>
+              <span className={styles.activityEmoji} aria-hidden="true">&#127796;</span>
+              <strong>Off-Road Adventure</strong>
+              <p>Explore Keahiakawelo (Garden of the Gods) and Shipwreck Beach by 4x4.</p>
+              <a href="https://www.fourseasons.com/lanai/experiences/" target="_blank" rel="noopener noreferrer">
+                Learn more &rarr;
+              </a>
+            </div>
+          </div>
+
+          <p className={styles.activitiesNote}>
+            The resort concierge can arrange any of these for you &mdash; just email{' '}
+            <a href="mailto:concierge.lanai@fourseasons.com">concierge.lanai@fourseasons.com</a> or
+            call the front desk after check-in.
+          </p>
+        </div>
       </div>
     </section>
   );

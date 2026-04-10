@@ -25,8 +25,6 @@ export default function RSVP() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       e.email = 'Please enter a valid email address.';
     }
-    if (!form.attendance) e.attendance = 'Please select your arrival date.';
-    if (!form.guests) e.guests = 'Please select your departure date.';
     return e;
   };
 
@@ -157,45 +155,31 @@ export default function RSVP() {
           <div className={styles.row}>
             <div className={styles.field}>
               <label htmlFor="rsvp-arrival" className={styles.label}>
-                Arrival Date <span aria-hidden="true">*</span>
+                Arrival Date
               </label>
-              <select
+              <input
                 id="rsvp-arrival"
+                type="date"
                 name="attendance"
                 value={form.attendance}
                 onChange={handleChange}
-                className={`${styles.select} ${!form.attendance ? styles.selectPlaceholder : ''} ${errors.attendance ? styles.inputError : ''}`}
-              >
-                <option value="" disabled>Select arrival date</option>
-                <option value="2026-08-05">Wed, August 5</option>
-                <option value="2026-08-06">Thu, August 6</option>
-                <option value="2026-08-07">Fri, August 7</option>
-                <option value="2026-08-08">Sat, August 8</option>
-                <option value="2026-08-09">Sun, August 9</option>
-                <option value="2026-08-10">Mon, August 10</option>
-              </select>
+                className={`${styles.input} ${errors.attendance ? styles.inputError : ''}`}
+              />
               {errors.attendance && <span className={styles.error} role="alert">{errors.attendance}</span>}
             </div>
 
             <div className={styles.field}>
               <label htmlFor="rsvp-departure" className={styles.label}>
-                Departure Date <span aria-hidden="true">*</span>
+                Departure Date
               </label>
-              <select
+              <input
                 id="rsvp-departure"
+                type="date"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
-                className={`${styles.select} ${!form.guests ? styles.selectPlaceholder : ''} ${errors.guests ? styles.inputError : ''}`}
-              >
-                <option value="" disabled>Select departure date</option>
-                <option value="2026-08-07">Fri, August 7</option>
-                <option value="2026-08-08">Sat, August 8</option>
-                <option value="2026-08-09">Sun, August 9</option>
-                <option value="2026-08-10">Mon, August 10</option>
-                <option value="2026-08-11">Tue, August 11</option>
-                <option value="2026-08-12">Wed, August 12</option>
-              </select>
+                className={`${styles.input} ${errors.guests ? styles.inputError : ''}`}
+              />
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}
             </div>
           </div>
