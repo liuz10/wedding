@@ -3,20 +3,6 @@ import aliceKid from '../assets/Alice_kid.jpg';
 import johnnyPhoto from '../assets/IMG_1249.jpg';
 import williamPhoto from '../assets/IMG_0463.jpg';
 
-const keyMoments = [
-  { year: '2019', note: 'We met!', className: 'point2019' },
-  {
-    year: '2020',
-    note: 'Our dog William is born!',
-    photo: williamPhoto,
-    alt: 'William the dog',
-    className: 'point2020a',
-  },
-  { year: '2020', note: 'Alice moved to Chicago!', className: 'point2020b' },
-  { year: '2025', note: 'Johnny proposed!', className: 'point2025' },
-  { year: '2026', note: 'We are getting married!', className: 'point2026', highlight: true },
-];
-
 export default function OurStory() {
   return (
     <section id="our-story" className={styles.section}>
@@ -39,57 +25,88 @@ export default function OurStory() {
         <p className={styles.storyCopy}>
           Long story short, Johnny slid into Alice&apos;s DMs on Instagram in the hot summer of
           2019, and fate started doing its thing. Alice moved to Chicago and the two began writing
-          their story together — starting with a dog named William in year one, I know, that&apos;s
-          pretty bold! Now in 2026, we&apos;re finally tying the knot and making it official. If
-          you&apos;re reading this, you&apos;re part of the story now, and we can&apos;t wait to
-          celebrate with you!
+          their story together &mdash; starting with a dog named William in year one, I know,
+          that&apos;s pretty bold! Now in 2026, we&apos;re finally tying the knot and making it
+          official. If you&apos;re reading this, you&apos;re part of the story now, and we
+          can&apos;t wait to celebrate with you!
         </p>
 
-        <div className={styles.roadmap} aria-label="Our relationship timeline">
-          {/* Desktop winding path */}
+        <div className={styles.timelineWrapper}>
           <svg
-            className={`${styles.route} ${styles.routeDesktop}`}
-            viewBox="0 0 1000 900"
-            preserveAspectRatio="none"
-            aria-hidden="true"
+            className={styles.timelineSvg}
+            viewBox="0 0 680 1080"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Our relationship timeline from 2019 to 2026"
           >
-            <path
-              className={styles.routePath}
-              d="M90 120 H370 Q440 120 440 190 V280 Q440 350 510 350 H790 Q860 350 860 420 V560 Q860 630 790 630 H270 Q200 630 200 700 V820"
-            />
-          </svg>
+            <defs>
+              <clipPath id="williamClip">
+                <circle cx="580" cy="420" r="42" />
+              </clipPath>
+            </defs>
 
-          {/* Mobile winding path */}
-          <svg
-            className={`${styles.route} ${styles.routeMobile}`}
-            viewBox="0 0 360 1100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
+            {/* S-curve dotted path */}
             <path
-              className={styles.routePath}
-              d="M60 60 H280 Q320 60 320 100 V230 Q320 270 280 270 H80 Q40 270 40 310 V480 Q40 520 80 520 H280 Q320 520 320 560 V720 Q320 760 280 760 H200 Q160 760 160 800 V960"
+              className={styles.dotLine}
+              d="M 100 80 C 380 80, 580 120, 580 270 C 580 420, 100 310, 100 460 C 100 610, 580 500, 580 650 C 580 800, 100 730, 100 850"
             />
-          </svg>
 
-          {keyMoments.map(({ year, note, photo, alt, className, highlight }) => (
-            <article
-              key={`${year}-${note}`}
-              className={`${styles.timelineItem} ${styles[className]} ${highlight ? styles.highlight : ''}`}
-            >
-              {photo && (
-                <figure className={styles.eventCircle}>
-                  <img src={photo} alt={alt} loading="lazy" />
-                </figure>
-              )}
-              <div className={styles.marker}>
-                <span className={styles.markerDot} />
-                <span className={styles.connectorLine} />
-              </div>
-              <div className={styles.yearPill}>{year}</div>
-              <p className={styles.note}>{note}</p>
-            </article>
-          ))}
+            {/* ── 2019 — We met! ── */}
+            <circle className={styles.pinCircle} cx="100" cy="80" r="7" />
+            <circle className={styles.pinDot} cx="100" cy="80" r="3" />
+            <line className={styles.pinStem} x1="100" y1="87" x2="100" y2="110" />
+            <rect className={styles.yearPill} x="56" y="110" width="88" height="36" rx="18" />
+            <text className={styles.yearText} x="100" y="133" textAnchor="middle">2019</text>
+            <text className={styles.milestoneText} x="100" y="170" textAnchor="middle">We met!</text>
+
+            {/* ── 2020 — Our dog William is born! ── */}
+            <circle className={styles.pinCircle} cx="580" cy="270" r="7" />
+            <circle className={styles.pinDot} cx="580" cy="270" r="3" />
+            <line className={styles.pinStem} x1="580" y1="277" x2="580" y2="300" />
+            <rect className={styles.yearPill} x="536" y="300" width="88" height="36" rx="18" />
+            <text className={styles.yearText} x="580" y="323" textAnchor="middle">2020</text>
+            <text className={styles.milestoneText} x="580" y="360" textAnchor="middle">Our dog William</text>
+            <text className={styles.milestoneText} x="580" y="379" textAnchor="middle">is born!</text>
+
+            {/* William photo — circular with outline */}
+            <circle cx="580" cy="420" r="45" fill="none" className={styles.photoOutline} />
+            <image
+              href={williamPhoto}
+              x="538"
+              y="378"
+              width="84"
+              height="84"
+              clipPath="url(#williamClip)"
+              preserveAspectRatio="xMidYMid slice"
+            />
+
+            {/* ── 2020 — Alice moved to Chicago! ── */}
+            <circle className={styles.pinCircle} cx="100" cy="460" r="7" />
+            <circle className={styles.pinDot} cx="100" cy="460" r="3" />
+            <line className={styles.pinStem} x1="100" y1="467" x2="100" y2="490" />
+            <rect className={styles.yearPill} x="56" y="490" width="88" height="36" rx="18" />
+            <text className={styles.yearText} x="100" y="513" textAnchor="middle">2020</text>
+            <text className={styles.milestoneText} x="100" y="550" textAnchor="middle">Alice moved to</text>
+            <text className={styles.milestoneText} x="100" y="569" textAnchor="middle">Chicago!</text>
+
+            {/* ── 2025 — Johnny proposed! ── */}
+            <circle className={styles.pinCircle} cx="580" cy="650" r="7" />
+            <circle className={styles.pinDot} cx="580" cy="650" r="3" />
+            <line className={styles.pinStem} x1="580" y1="657" x2="580" y2="680" />
+            <rect className={styles.yearPill} x="536" y="680" width="88" height="36" rx="18" />
+            <text className={styles.yearText} x="580" y="703" textAnchor="middle">2025</text>
+            <text className={styles.milestoneText} x="580" y="740" textAnchor="middle">Johnny proposed!</text>
+
+            {/* ── 2026 — We're getting married! ── */}
+            <circle className={styles.pinCircle} cx="100" cy="850" r="7" />
+            <circle className={styles.pinDot} cx="100" cy="850" r="3" />
+            <line className={styles.pinStem} x1="100" y1="857" x2="100" y2="880" />
+            <rect className={styles.finalPill} x="52" y="880" width="96" height="36" rx="18" />
+            <text className={styles.finalText} x="100" y="903" textAnchor="middle">2026</text>
+            <text className={styles.milestoneText} x="100" y="940" textAnchor="middle">
+              We&apos;re getting married!
+            </text>
+          </svg>
         </div>
       </div>
     </section>
