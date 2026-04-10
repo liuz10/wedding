@@ -8,10 +8,10 @@
   transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
-.header:has(.navOpen) {
-  background: rgba(250, 246, 240, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+.menuOpen {
+  background: rgba(250, 246, 240, 0.96) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
 
 .header.scrolled {

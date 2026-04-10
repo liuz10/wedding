@@ -24,7 +24,7 @@ export default function Header() {
   const handleNavClick = () => setMenuOpen(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
       <div className={styles.inner}>
         <a href="#hero" className={styles.brand}>
           {t('header.brand')}

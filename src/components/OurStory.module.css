@@ -70,7 +70,7 @@
 
 /* ── Pin markers ── */
 .pinCircle {
-  fill: none;
+  fill: var(--color-white);
   stroke: var(--color-gold-dark);
   stroke-width: 1.5;
 }
@@ -121,7 +121,7 @@
 /* ── William photo outline ── */
 .photoOutline {
   stroke: var(--color-gold-dark);
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 
 /* ═══════════════════════════════════════
