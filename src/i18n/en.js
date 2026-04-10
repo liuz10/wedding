@@ -167,7 +167,7 @@ const en = {
     names: 'Alice & Johnny',
     date: 'August 8th, 2026 \u00B7 Four Seasons Resort L\u0101na\u02BBi',
     tagline: 'Two souls, one love, one beautiful beginning.',
-    copy: 'Made with love',
+    copy: 'made with love & 100% Copilot ;)',
   },
 
   // ── Access Gate ──

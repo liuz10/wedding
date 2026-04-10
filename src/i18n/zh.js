@@ -172,7 +172,7 @@ const zh = {
     "names": "Alice & Johnny",
     "date": "2026年8月8日 · 拉奈岛四季度假村",
     "tagline": "两颗心，一份爱，一个美丽的开始。",
-    "copy": "用爱制作"
+    "copy": "用爱制作 & 100% Copilot ;)"
   },
   "gate": {
     "hint": "它叫什么名字？",

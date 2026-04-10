@@ -3,7 +3,6 @@ import styles from './Footer.module.css';
 
 export default function Footer() {
   const { t } = useLanguage();
-  const year = new Date().getFullYear();
 
   return (
     <footer className={styles.footer}>
@@ -21,7 +20,7 @@ export default function Footer() {
         </p>
 
         <p className={styles.copy}>
-          &copy; {year} · {t('footer.copy')}
+          &copy; 2026 · {t('footer.copy')}
         </p>
       </div>
     </footer>
