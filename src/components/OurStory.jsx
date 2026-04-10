@@ -41,7 +41,7 @@ export default function OurStory() {
           >
             <defs>
               <clipPath id="williamClip">
-                <circle cx="580" cy="420" r="42" />
+                <circle cx="580" cy="455" r="42" />
               </clipPath>
             </defs>
 
@@ -69,11 +69,11 @@ export default function OurStory() {
             <text className={styles.milestoneText} x="580" y="379" textAnchor="middle">is born!</text>
 
             {/* William photo — circular with outline */}
-            <circle cx="580" cy="420" r="45" fill="none" className={styles.photoOutline} />
+            <circle cx="580" cy="455" r="45" fill="none" className={styles.photoOutline} />
             <image
               href={williamPhoto}
               x="538"
-              y="378"
+              y="413"
               width="84"
               height="84"
               clipPath="url(#williamClip)"
