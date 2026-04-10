@@ -37,6 +37,14 @@ export default function App() {
 
   useEffect(() => {
     document.title = isUnlocked ? UNLOCKED_TITLE : LOCKED_TITLE;
+    if (isUnlocked) {
+      // Reset scroll and zoom when entering the site
+      window.scrollTo(0, 0);
+      const vp = document.querySelector('meta[name="viewport"]');
+      if (vp) {
+        vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+      }
+    }
   }, [isUnlocked]);
 
   return (
