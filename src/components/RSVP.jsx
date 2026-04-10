@@ -159,16 +159,21 @@ export default function RSVP() {
               <label htmlFor="rsvp-arrival" className={styles.label}>
                 Arrival Date <span aria-hidden="true">*</span>
               </label>
-              <input
+              <select
                 id="rsvp-arrival"
-                type="date"
                 name="attendance"
                 value={form.attendance}
                 onChange={handleChange}
-                min="2026-08-05"
-                max="2026-08-10"
-                className={`${styles.input} ${errors.attendance ? styles.inputError : ''}`}
-              />
+                className={`${styles.select} ${!form.attendance ? styles.selectPlaceholder : ''} ${errors.attendance ? styles.inputError : ''}`}
+              >
+                <option value="" disabled>Select arrival date</option>
+                <option value="2026-08-05">Wed, August 5</option>
+                <option value="2026-08-06">Thu, August 6</option>
+                <option value="2026-08-07">Fri, August 7</option>
+                <option value="2026-08-08">Sat, August 8</option>
+                <option value="2026-08-09">Sun, August 9</option>
+                <option value="2026-08-10">Mon, August 10</option>
+              </select>
               {errors.attendance && <span className={styles.error} role="alert">{errors.attendance}</span>}
             </div>
 
@@ -176,16 +181,21 @@ export default function RSVP() {
               <label htmlFor="rsvp-departure" className={styles.label}>
                 Departure Date <span aria-hidden="true">*</span>
               </label>
-              <input
+              <select
                 id="rsvp-departure"
-                type="date"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
-                min="2026-08-07"
-                max="2026-08-12"
-                className={`${styles.input} ${errors.guests ? styles.inputError : ''}`}
-              />
+                className={`${styles.select} ${!form.guests ? styles.selectPlaceholder : ''} ${errors.guests ? styles.inputError : ''}`}
+              >
+                <option value="" disabled>Select departure date</option>
+                <option value="2026-08-07">Fri, August 7</option>
+                <option value="2026-08-08">Sat, August 8</option>
+                <option value="2026-08-09">Sun, August 9</option>
+                <option value="2026-08-10">Mon, August 10</option>
+                <option value="2026-08-11">Tue, August 11</option>
+                <option value="2026-08-12">Wed, August 12</option>
+              </select>
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}
             </div>
           </div>
