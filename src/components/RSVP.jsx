@@ -160,10 +160,13 @@ export default function RSVP() {
               </label>
               <input
                 id="rsvp-arrival"
-                type="date"
+                type="text"
                 name="attendance"
                 value={form.attendance}
                 onChange={handleChange}
+                onFocus={(e) => { e.target.type = 'date'; }}
+                onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
+                placeholder={t('rsvp.arrivalPlaceholder')}
                 className={`${styles.input} ${errors.attendance ? styles.inputError : ''}`}
               />
               {errors.attendance && <span className={styles.error} role="alert">{errors.attendance}</span>}
@@ -175,10 +178,13 @@ export default function RSVP() {
               </label>
               <input
                 id="rsvp-departure"
-                type="date"
+                type="text"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
+                onFocus={(e) => { e.target.type = 'date'; }}
+                onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
+                placeholder={t('rsvp.departurePlaceholder')}
                 className={`${styles.input} ${errors.guests ? styles.inputError : ''}`}
               />
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}

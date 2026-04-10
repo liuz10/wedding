@@ -86,7 +86,9 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
       }
 
       setIsUnlocking(true);
+      window.scrollTo(0, 0);
       window.setTimeout(() => {
+        window.scrollTo(0, 0);
         onUnlock();
       }, 460);
     } catch (error) {
