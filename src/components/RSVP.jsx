@@ -160,14 +160,12 @@ export default function RSVP() {
               </label>
               <input
                 id="rsvp-arrival"
-                type="text"
+                type="date"
                 name="attendance"
                 value={form.attendance}
                 onChange={handleChange}
-                onFocus={(e) => { e.target.type = 'date'; }}
-                onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
-                placeholder={t('rsvp.arrivalPlaceholder')}
-                className={`${styles.input} ${errors.attendance ? styles.inputError : ''}`}
+                placeholder="mm/dd/yyyy"
+                className={`${styles.input} ${styles.dateInput} ${errors.attendance ? styles.inputError : ''} ${!form.attendance ? styles.dateEmpty : ''}`}
               />
               {errors.attendance && <span className={styles.error} role="alert">{errors.attendance}</span>}
             </div>
@@ -178,14 +176,12 @@ export default function RSVP() {
               </label>
               <input
                 id="rsvp-departure"
-                type="text"
+                type="date"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
-                onFocus={(e) => { e.target.type = 'date'; }}
-                onBlur={(e) => { if (!e.target.value) e.target.type = 'text'; }}
-                placeholder={t('rsvp.departurePlaceholder')}
-                className={`${styles.input} ${errors.guests ? styles.inputError : ''}`}
+                placeholder="mm/dd/yyyy"
+                className={`${styles.input} ${styles.dateInput} ${errors.guests ? styles.inputError : ''} ${!form.guests ? styles.dateEmpty : ''}`}
               />
               {errors.guests && <span className={styles.error} role="alert">{errors.guests}</span>}
             </div>

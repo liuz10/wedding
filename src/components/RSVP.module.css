@@ -103,6 +103,27 @@
   box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
 }
 
+/* Date input: show mm/dd/yyyy placeholder on iOS Safari */
+.dateInput {
+  position: relative;
+}
+
+.dateEmpty {
+  color: transparent;
+}
+
+.dateEmpty::before {
+  content: 'mm/dd/yyyy';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
 .select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a08070' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
