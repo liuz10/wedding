@@ -30,55 +30,30 @@ export default function BookingInstructions() {
         </div>
 
         <div className={styles.activitiesPanel}>
-          <h3 className={styles.activitiesTitle}>While You&apos;re Here</h3>
+          <h3 className={styles.activitiesTitle}>Things to Do at the Resort &amp; on L&#257;na&#699;i</h3>
           <p className={styles.activitiesCopy}>
-            L&#257;na&#699;i is a hidden gem with plenty to explore between celebrations.
-            Here are a few of our favorites:
+            There are numerous activities at the hotel and around the island!
+            It is recommended to book activities, spa appointments, and dining reservations
+            in advance since there is limited availability. You will receive an email from the
+            L&#257;na&#699;i Experience planners
+            at <a href="mailto:exp.lanai@fourseasons.com">exp.lanai@fourseasons.com</a>.
           </p>
 
           <div className={styles.activityGrid}>
-            <div className={styles.activityCard}>
-              <span className={styles.activityEmoji} aria-hidden="true">&#127948;&#65039;</span>
-              <strong>Golf at Manele</strong>
-              <p>Championship course with ocean views on every hole.</p>
-              <a href="https://www.fourseasons.com/lanai/golf/" target="_blank" rel="noopener noreferrer">
-                Learn more &rarr;
-              </a>
-            </div>
-
-            <div className={styles.activityCard}>
+            <a href="https://www.fourseasons.com/lanai/spa/" target="_blank" rel="noopener noreferrer" className={styles.activityCard}>
               <span className={styles.activityEmoji} aria-hidden="true">&#128134;</span>
               <strong>Hawanawana Spa</strong>
               <p>Oceanfront treatments inspired by Hawaiian healing traditions.</p>
-              <a href="https://www.fourseasons.com/lanai/spa/" target="_blank" rel="noopener noreferrer">
-                Learn more &rarr;
-              </a>
-            </div>
+              <span className={styles.activityLink}>View spa services &rarr;</span>
+            </a>
 
-            <div className={styles.activityCard}>
-              <span className={styles.activityEmoji} aria-hidden="true">&#127754;</span>
-              <strong>Snorkeling &amp; Diving</strong>
-              <p>Hulopoe Bay is home to reef fish, sea turtles, and spinner dolphins.</p>
-              <a href="https://www.fourseasons.com/lanai/experiences/" target="_blank" rel="noopener noreferrer">
-                Learn more &rarr;
-              </a>
-            </div>
-
-            <div className={styles.activityCard}>
+            <a href="https://www.fourseasons.com/lanai/experiences/" target="_blank" rel="noopener noreferrer" className={styles.activityCard}>
               <span className={styles.activityEmoji} aria-hidden="true">&#127796;</span>
-              <strong>Off-Road Adventure</strong>
-              <p>Explore Keahiakawelo (Garden of the Gods) and Shipwreck Beach by 4x4.</p>
-              <a href="https://www.fourseasons.com/lanai/experiences/" target="_blank" rel="noopener noreferrer">
-                Learn more &rarr;
-              </a>
-            </div>
+              <strong>Island Experiences</strong>
+              <p>Golf, snorkeling, off-road adventures, and more &mdash; see the full weekly itinerary.</p>
+              <span className={styles.activityLink}>Browse activities &rarr;</span>
+            </a>
           </div>
-
-          <p className={styles.activitiesNote}>
-            The resort concierge can arrange any of these for you &mdash; just email{' '}
-            <a href="mailto:concierge.lanai@fourseasons.com">concierge.lanai@fourseasons.com</a> or
-            call the front desk after check-in.
-          </p>
         </div>
       </div>
     </section>

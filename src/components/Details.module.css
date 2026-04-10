@@ -106,6 +106,24 @@
   transform: rotate(180deg);
 }
 
+/* ── Tap hint ── */
+.tapHint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ── Hover / active feedback on summary ── */
+.summary:hover {
+  background: rgba(184, 196, 106, 0.06);
+}
+
+.summary:active {
+  background: rgba(184, 196, 106, 0.12);
+}
+
 /* ── Collapsible content ── */
 .content {
   display: grid;

@@ -93,6 +93,10 @@ function ScheduleCard({ day, title, teaser, image, events }) {
         <span className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`} aria-hidden="true">
           &#x25BE;
         </span>
+
+        {!open && (
+          <span className={styles.tapHint}>Tap to view details</span>
+        )}
       </div>
 
       <div className={`${styles.content} ${open ? styles.contentOpen : ''}`}>
