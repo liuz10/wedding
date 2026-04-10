@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { LanguageProvider } from './i18n/LanguageContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import GettingThere from './components/GettingThere';
@@ -39,9 +40,9 @@ export default function App() {
   }, [isUnlocked]);
 
   return (
-    <>
+    <LanguageProvider>
       <AccessGate isUnlocked={isUnlocked} onUnlock={() => setIsUnlocked(true)} />
       {isUnlocked && <InvitationContent />}
-    </>
+    </LanguageProvider>
   );
 }

@@ -1,22 +1,20 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './DressCode.module.css';
 
 export default function DressCode() {
+  const { t } = useLanguage();
+
   return (
     <section id="dress-code" className={styles.section}>
       <div className="container">
-        <p className="section-subtitle">Style</p>
-        <h2 className="section-title">Dress Code</h2>
+        <p className="section-subtitle">{t('dress.subtitle')}</p>
+        <h2 className="section-title">{t('dress.title')}</h2>
         <div className="section-divider"><span>✦</span></div>
 
         <div className={styles.content}>
           <div className={styles.copy}>
-            <p className={styles.lead}>Formal Attire Requested</p>
-            <p>
-              Suits and elegant dresses are warmly encouraged, and to keep photos cohesive we kindly ask
-              guests to avoid black and white (reserved for the couple) as well as very bright or neon
-              shades; beautiful options include jewel tones, muted earth tones, champagne, sage, navy,
-              plum, and dusty rose.
-            </p>
+            <p className={styles.lead}>{t('dress.lead')}</p>
+            <p>{t('dress.copy')}</p>
           </div>
 
           <div className={styles.imageRail}>

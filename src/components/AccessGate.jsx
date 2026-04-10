@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import dogImage from '../assets/Subject.png';
 import styles from './AccessGate.module.css';
 
@@ -50,6 +51,7 @@ function useKeyboardViewportLock() {
 }
 
 export default function AccessGate({ isUnlocked, onUnlock }) {
+  const { t } = useLanguage();
   const [answer, setAnswer] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showFailPopup, setShowFailPopup] = useState(false);
@@ -139,7 +141,7 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
 
         <form onSubmit={handleValidate} className={styles.form}>
           <label htmlFor="gate-answer" className={styles.inlinePrompt}>
-            <span className={styles.hint}>What&apos;s my name?</span>
+            <span className={styles.hint}>{t('gate.hint')}</span>
             <span className={styles.inputRow}>
               <input
                 id="gate-answer"
@@ -161,7 +163,7 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
             </span>
           </label>
           <button type="submit" className={styles.submitBtn} disabled={isSubmitting || !validateUrl}>
-            {isSubmitting ? 'Checking…' : 'Enter'}
+            {isSubmitting ? t('gate.checking') : t('gate.submit')}
           </button>
         </form>
       </div>
@@ -169,13 +171,13 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
       {showFailPopup && (
         <div className={styles.popupBackdrop} role="dialog" aria-modal="true" aria-labelledby="gate-fail-title">
           <div className={styles.popup}>
-            <h2 id="gate-fail-title" className={styles.popupTitle}>Bye, stranger.</h2>
+            <h2 id="gate-fail-title" className={styles.popupTitle}>{t('gate.failTitle')}</h2>
             <button
               type="button"
               className={styles.retryBtn}
               onClick={() => window.location.reload()}
             >
-              try again?
+              {t('gate.retry')}
             </button>
           </div>
         </div>

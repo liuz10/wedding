@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './RSVP.module.css';
 
 const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
@@ -13,17 +14,18 @@ const INITIAL = {
 };
 
 export default function RSVP() {
+  const { t } = useLanguage();
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = 'Please enter your name.';
+    if (!form.name.trim()) e.name = t('rsvp.errorName');
     if (!form.email.trim()) {
-      e.email = 'Please enter your email.';
+      e.email = t('rsvp.errorEmail');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      e.email = 'Please enter a valid email address.';
+      e.email = t('rsvp.errorEmailInvalid');
     }
     return e;
   };
@@ -83,12 +85,12 @@ export default function RSVP() {
         <div className="container">
           <div className={styles.successBox}>
             <span className={styles.successIcon} aria-hidden="true">✦</span>
-            <h2 className={styles.successTitle}>Thank You!</h2>
+            <h2 className={styles.successTitle}>{t('rsvp.successTitle')}</h2>
             <p className={styles.successMsg}>
-              Your response has been received. We can’t wait to celebrate with you!
+              {t('rsvp.successMsg')}
             </p>
             <button className={styles.resetBtn} onClick={() => setStatus('idle')}>
-              Submit Another Response
+              {t('rsvp.successReset')}
             </button>
           </div>
         </div>
@@ -99,13 +101,12 @@ export default function RSVP() {
   return (
     <section id="rsvp" className={styles.section}>
       <div className="container">
-        <p className="section-subtitle">Let Us Know</p>
-        <h2 className="section-title">Travel Details</h2>
+        <p className="section-subtitle">{t('rsvp.subtitle')}</p>
+        <h2 className="section-title">{t('rsvp.title')}</h2>
         <div className="section-divider"><span>✦</span></div>
 
         <p className={styles.intro}>
-          We’re so excited to have you! Please share your travel dates so we can
-          help coordinate transportation and plan the weekend.
+          {t('rsvp.intro')}
         </p>
 
         {!SCRIPT_URL && (
@@ -119,7 +120,7 @@ export default function RSVP() {
           <div className={styles.row}>
             <div className={styles.field}>
               <label htmlFor="rsvp-name" className={styles.label}>
-                Full Name <span aria-hidden="true">*</span>
+                {t('rsvp.nameLabel')} <span aria-hidden="true">{t('rsvp.required')}</span>
               </label>
               <input
                 id="rsvp-name"
@@ -127,7 +128,7 @@ export default function RSVP() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Jane & John Smith"
+                placeholder={t('rsvp.namePlaceholder')}
                 className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
                 autoComplete="name"
               />
@@ -136,7 +137,7 @@ export default function RSVP() {
 
             <div className={styles.field}>
               <label htmlFor="rsvp-email" className={styles.label}>
-                Email Address <span aria-hidden="true">*</span>
+                {t('rsvp.emailLabel')} <span aria-hidden="true">{t('rsvp.required')}</span>
               </label>
               <input
                 id="rsvp-email"
@@ -144,7 +145,7 @@ export default function RSVP() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="you@example.com"
+                placeholder={t('rsvp.emailPlaceholder')}
                 className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
                 autoComplete="email"
               />
@@ -155,7 +156,7 @@ export default function RSVP() {
           <div className={styles.row}>
             <div className={styles.field}>
               <label htmlFor="rsvp-arrival" className={styles.label}>
-                Arrival Date
+                {t('rsvp.arrivalLabel')}
               </label>
               <input
                 id="rsvp-arrival"
@@ -170,7 +171,7 @@ export default function RSVP() {
 
             <div className={styles.field}>
               <label htmlFor="rsvp-departure" className={styles.label}>
-                Departure Date
+                {t('rsvp.departureLabel')}
               </label>
               <input
                 id="rsvp-departure"
@@ -186,7 +187,7 @@ export default function RSVP() {
 
           <div className={styles.field}>
             <label htmlFor="rsvp-dietary" className={styles.label}>
-              Dietary Restrictions
+              {t('rsvp.dietaryLabel')}
             </label>
             <input
               id="rsvp-dietary"
@@ -194,21 +195,21 @@ export default function RSVP() {
               name="arrivalDate"
               value={form.arrivalDate}
               onChange={handleChange}
-              placeholder="Vegetarian, gluten-free, allergies, etc."
+              placeholder={t('rsvp.dietaryPlaceholder')}
               className={styles.input}
             />
           </div>
 
           <div className={styles.field}>
             <label htmlFor="rsvp-notes" className={styles.label}>
-              Questions or Notes
+              {t('rsvp.notesLabel')}
             </label>
             <textarea
               id="rsvp-notes"
               name="dietary"
               value={form.dietary}
               onChange={handleChange}
-              placeholder="Anything else you'd like us to know?"
+              placeholder={t('rsvp.notesPlaceholder')}
               rows={3}
               className={styles.textarea}
             />
@@ -216,7 +217,7 @@ export default function RSVP() {
 
           {status === 'error' && (
             <div className={styles.errorBanner} role="alert">
-              Something went wrong. Please try again or contact us directly.
+              {t('rsvp.errorGeneric')}
             </div>
           )}
 
@@ -225,7 +226,7 @@ export default function RSVP() {
             className={styles.submitBtn}
             disabled={status === 'submitting'}
           >
-            {status === 'submitting' ? 'Sending…' : 'Submit'}
+            {status === 'submitting' ? t('rsvp.submitting') : t('rsvp.submit')}
           </button>
         </form>
       </div>

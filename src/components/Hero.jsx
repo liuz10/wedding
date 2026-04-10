@@ -1,7 +1,10 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Hero.module.css';
 import ceremonyVenue from '../assets/Ceremony_venue.jpg';
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="hero"
@@ -11,8 +14,8 @@ export default function Hero() {
       <div className={styles.backdrop} aria-hidden="true" />
 
       <div className={styles.content}>
-        <h1 className={styles.mainTitle}>We are getting married!</h1>
-        <p className={styles.coupleName}>Alice &amp; Johnny</p>
+        <h1 className={styles.mainTitle}>{t('hero.mainTitle')}</h1>
+        <p className={styles.coupleName}>{t('hero.coupleName')}</p>
 
         <div className={styles.divider} aria-hidden="true">
           <span className={styles.dividerLine} />
@@ -20,17 +23,17 @@ export default function Hero() {
           <span className={styles.dividerLine} />
         </div>
 
-        <p className={styles.invite}>Join us for a three-day celebration in Lanai, Hawaii.</p>
+        <p className={styles.invite}>{t('hero.invite')}</p>
 
         <div className={styles.details}>
           <div className={styles.detail}>
-            <span className={styles.detailLabel}>Date</span>
-            <span className={styles.detailValue}>August 8th 2026</span>
+            <span className={styles.detailLabel}>{t('hero.dateLabel')}</span>
+            <span className={styles.detailValue}>{t('hero.dateValue')}</span>
           </div>
           <div className={styles.detailSep} aria-hidden="true">✦</div>
           <div className={styles.detail}>
-            <span className={styles.detailLabel}>Location</span>
-            <span className={styles.detailValue}>Lanai Four Season Resort</span>
+            <span className={styles.detailLabel}>{t('hero.locationLabel')}</span>
+            <span className={styles.detailValue}>{t('hero.locationValue')}</span>
           </div>
         </div>
       </div>

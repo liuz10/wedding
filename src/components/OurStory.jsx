@@ -1,34 +1,32 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './OurStory.module.css';
 import aliceKid from '../assets/Alice_kid.jpg';
 import johnnyPhoto from '../assets/IMG_1249.jpg';
 import williamPhoto from '../assets/IMG_0463.jpg';
 
 export default function OurStory() {
+  const { t } = useLanguage();
+
   return (
     <section id="our-story" className={styles.section}>
       <div className="container">
-        <p className="section-subtitle">Our Journey</p>
-        <h2 className="section-title">Our Story</h2>
+        <p className="section-subtitle">{t('story.subtitle')}</p>
+        <h2 className="section-title">{t('story.title')}</h2>
         <div className="section-divider"><span>✦</span></div>
 
         <div className={styles.photoRow}>
           <figure className={styles.profileCircle}>
             <img src={aliceKid} alt="Alice as a child" loading="lazy" />
-            <figcaption>Alice</figcaption>
+            <figcaption>{t('story.aliceName')}</figcaption>
           </figure>
           <figure className={styles.profileCircle}>
             <img src={johnnyPhoto} alt="Johnny portrait" loading="lazy" />
-            <figcaption>Johnny</figcaption>
+            <figcaption>{t('story.johnnyName')}</figcaption>
           </figure>
         </div>
 
         <p className={styles.storyCopy}>
-          Long story short, Johnny slid into Alice&apos;s DMs on Instagram in the hot summer of
-          2019, and fate started doing its thing. Alice moved to Chicago and the two began writing
-          their story together &mdash; starting with a dog named William in year one, I know,
-          that&apos;s pretty bold! Now in 2026, we&apos;re finally tying the knot and making it
-          official. If you&apos;re reading this, you&apos;re part of the story now, and we
-          can&apos;t wait to celebrate with you!
+          {t('story.copy')}
         </p>
 
         <div className={styles.timelineWrapper}>
@@ -57,7 +55,7 @@ export default function OurStory() {
             <line className={styles.pinStem} x1="100" y1="87" x2="100" y2="110" />
             <rect className={styles.yearPill} x="56" y="110" width="88" height="36" rx="18" />
             <text className={styles.yearText} x="100" y="133" textAnchor="middle">2019</text>
-            <text className={styles.milestoneText} x="100" y="170" textAnchor="middle">We met!</text>
+            <text className={styles.milestoneText} x="100" y="170" textAnchor="middle">{t('story.y2019')}</text>
 
             {/* ── 2020 — Our dog William is born! ── */}
             <circle className={styles.pinCircle} cx="580" cy="270" r="7" />
@@ -65,8 +63,8 @@ export default function OurStory() {
             <line className={styles.pinStem} x1="580" y1="277" x2="580" y2="300" />
             <rect className={styles.yearPill} x="536" y="300" width="88" height="36" rx="18" />
             <text className={styles.yearText} x="580" y="323" textAnchor="middle">2020</text>
-            <text className={styles.milestoneText} x="580" y="360" textAnchor="middle">Our dog William</text>
-            <text className={styles.milestoneText} x="580" y="379" textAnchor="middle">is born!</text>
+            <text className={styles.milestoneText} x="580" y="360" textAnchor="middle">{t('story.y2020a')}</text>
+            <text className={styles.milestoneText} x="580" y="379" textAnchor="middle">{t('story.y2020a2')}</text>
 
             {/* William photo — circular with outline */}
             <circle cx="580" cy="455" r="45" fill="none" className={styles.photoOutline} />
@@ -86,8 +84,8 @@ export default function OurStory() {
             <line className={styles.pinStem} x1="100" y1="467" x2="100" y2="490" />
             <rect className={styles.yearPill} x="56" y="490" width="88" height="36" rx="18" />
             <text className={styles.yearText} x="100" y="513" textAnchor="middle">2020</text>
-            <text className={styles.milestoneText} x="100" y="550" textAnchor="middle">Alice moved to</text>
-            <text className={styles.milestoneText} x="100" y="569" textAnchor="middle">Chicago!</text>
+            <text className={styles.milestoneText} x="100" y="550" textAnchor="middle">{t('story.y2020b')}</text>
+            <text className={styles.milestoneText} x="100" y="569" textAnchor="middle">{t('story.y2020b2')}</text>
 
             {/* ── 2025 — Johnny proposed! ── */}
             <circle className={styles.pinCircle} cx="580" cy="650" r="7" />
@@ -95,7 +93,7 @@ export default function OurStory() {
             <line className={styles.pinStem} x1="580" y1="657" x2="580" y2="680" />
             <rect className={styles.yearPill} x="536" y="680" width="88" height="36" rx="18" />
             <text className={styles.yearText} x="580" y="703" textAnchor="middle">2025</text>
-            <text className={styles.milestoneText} x="580" y="740" textAnchor="middle">Johnny proposed!</text>
+            <text className={styles.milestoneText} x="580" y="740" textAnchor="middle">{t('story.y2025')}</text>
 
             {/* ── 2026 — We're getting married! ── */}
             <circle className={styles.pinCircle} cx="100" cy="850" r="7" />
@@ -104,7 +102,7 @@ export default function OurStory() {
             <rect className={styles.finalPill} x="52" y="880" width="96" height="36" rx="18" />
             <text className={styles.finalText} x="100" y="903" textAnchor="middle">2026</text>
             <text className={styles.milestoneText} x="100" y="940" textAnchor="middle">
-              We&apos;re getting married!
+              {t('story.y2026')}
             </text>
           </svg>
         </div>

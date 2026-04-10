@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Header.module.css';
 
-const navLinks = [
-  { label: 'Booking Instructions', href: '#booking-instructions' },
-  { label: 'Getting Here', href: '#getting-there' },
-  { label: 'Dress Code', href: '#dress-code' },
-  { label: 'Weekend Schedule', href: '#details' },
-  { label: 'Our Story', href: '#our-story' },
-];
-
 export default function Header() {
+  const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: t('header.nav.booking'), href: '#booking-instructions' },
+    { label: t('header.nav.gettingThere'), href: '#getting-there' },
+    { label: t('header.nav.dressCode'), href: '#dress-code' },
+    { label: t('header.nav.schedule'), href: '#details' },
+    { label: t('header.nav.ourStory'), href: '#our-story' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -25,18 +27,24 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <a href="#hero" className={styles.brand}>
-          Alice &amp; Johnny
+          {t('header.brand')}
         </a>
 
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
           {navLinks.map(({ label, href }) => (
-            <a key={label} href={href} className={styles.navLink} onClick={handleNavClick}>
+            <a key={href} href={href} className={styles.navLink} onClick={handleNavClick}>
               {label}
             </a>
           ))}
           <a href="#rsvp" className={styles.navCta} onClick={handleNavClick}>
-            RSVP
+            {t('header.nav.rsvp')}
           </a>
+          <button
+            className={styles.langToggle}
+            onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+          >
+            {t('header.langToggle')}
+          </button>
         </nav>
 
         <button

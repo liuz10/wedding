@@ -8,6 +8,12 @@
   transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
+.header:has(.navOpen) {
+  background: rgba(250, 246, 240, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .header.scrolled {
   background: rgba(250, 246, 240, 0.96);
   backdrop-filter: blur(8px);
@@ -182,6 +188,34 @@
     font-size: 0.88rem;
     border-width: 2px;
   }
+
+  .langToggle {
+    margin-top: 16px;
+    padding: 8px 20px;
+    font-size: 0.82rem;
+    border-radius: 20px;
+  }
+}
+
+.langToggle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid rgba(184, 196, 106, 0.4);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-top: 4px;
+  align-self: center;
+}
+
+.langToggle:hover {
+  color: var(--color-gold-dark);
+  border-color: var(--color-gold);
 }
 
 @keyframes navFadeIn {
