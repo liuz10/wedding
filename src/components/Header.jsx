@@ -21,16 +21,41 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const handleNavClick = () => setMenuOpen(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
-      <div className={styles.inner}>
-        <a href="#hero" className={styles.brand}>
-          {t('header.brand')}
-        </a>
+    <>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+        <div className={styles.inner}>
+          <a href="#hero" className={styles.brand} onClick={handleNavClick}>
+            {t('header.brand')}
+          </a>
 
-        <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
+          <button
+            className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
+
+      {/* Full-screen overlay nav */}
+      <div
+        className={`${styles.overlay} ${menuOpen ? styles.overlayOpen : ''}`}
+        onClick={handleNavClick}
+      >
+        <nav className={styles.nav} onClick={(e) => e.stopPropagation()}>
           {navLinks.map(({ label, href }) => (
             <a key={href} href={href} className={styles.navLink} onClick={handleNavClick}>
               {label}
@@ -46,18 +71,7 @@ export default function Header() {
             {t('header.langToggle')}
           </button>
         </nav>
-
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
       </div>
-    </header>
+    </>
   );
 }

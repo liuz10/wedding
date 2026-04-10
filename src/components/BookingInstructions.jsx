@@ -28,10 +28,6 @@ export default function BookingInstructions() {
 
         <div className={styles.activitiesPanel}>
           <h3 className={styles.activitiesTitle}>{t('booking.activitiesTitle')}</h3>
-          <p className={styles.activitiesCopy}>
-            {t('booking.activitiesCopy')}{' '}
-            <a href="mailto:exp.lanai@fourseasons.com">{t('booking.activitiesEmail')}</a>.
-          </p>
 
           <div className={styles.activityGrid}>
             <a href="https://www.fourseasons.com/lanai/spa/" target="_blank" rel="noopener noreferrer" className={styles.activityCard}>
@@ -48,6 +44,11 @@ export default function BookingInstructions() {
               <span className={styles.activityLink}>{t('booking.experienceLink')} &rarr;</span>
             </a>
           </div>
+
+          <p className={styles.activitiesCopy}>
+            {t('booking.activitiesCopy')}{' '}
+            <a href="mailto:exp.lanai@fourseasons.com">{t('booking.activitiesEmail')}</a>.
+          </p>
         </div>
       </div>
     </section>
