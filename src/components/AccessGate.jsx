@@ -114,7 +114,7 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
           </p>
         )}
 
-        <form onSubmit={handleValidate} className={styles.form}>
+        <form id="gate-form" onSubmit={handleValidate} className={styles.form}>
           <label htmlFor="gate-answer" className={styles.inlinePrompt}>
             <span className={styles.hint}>{t('gate.hint')}</span>
             <span className={styles.inputRow}>
@@ -132,13 +132,26 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
                 enterKeyHint="go"
                 disabled={isSubmitting || !validateUrl}
               />
-              <button
-                type="submit"
+              <span
+                role="button"
+                tabIndex={0}
                 className={styles.suffix}
-                disabled={isSubmitting || !validateUrl}
+                onClick={() => {
+                  if (!isSubmitting && validateUrl) {
+                    document.getElementById('gate-form').requestSubmit();
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (!isSubmitting && validateUrl) {
+                      document.getElementById('gate-form').requestSubmit();
+                    }
+                  }
+                }}
               >
                 {isSubmitting ? <span className={styles.spinner} /> : '↑'}
-              </button>
+              </span>
             </span>
           </label>
           <button type="submit" className={styles.submitBtn} disabled={isSubmitting || !validateUrl}>

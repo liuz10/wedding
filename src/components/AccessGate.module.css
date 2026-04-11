@@ -77,31 +77,20 @@
   line-height: 1;
   width: 24px;
   height: 24px;
-  min-width: 24px;
-  min-height: 24px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(108, 108, 108, 0.18);
-  border: none;
-  padding: 0;
-  margin: 0;
   cursor: pointer;
   flex-shrink: 0;
-  -webkit-appearance: none;
-  appearance: none;
-  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .suffix:hover {
   background: rgba(108, 108, 108, 0.3);
-}
-
-.suffix:disabled {
-  opacity: 0.4;
-  cursor: default;
 }
 
 .spinner {
