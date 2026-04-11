@@ -33,7 +33,7 @@
   font-weight: 400;
 }
 
-/* ── Desktop: scroll zone is just a simple container ── */
+/* ── Scroll zone ── */
 .scrollZone {
   max-width: 740px;
   margin: 0 auto;
@@ -43,44 +43,31 @@
   /* no sticky on desktop */
 }
 
-/* Desktop: 2×2 grid */
+/* ── Desktop: 2×2 grid ── */
 .imageRail {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 420px;
   gap: 16px;
   padding-bottom: 48px;
 }
 
-.imageRail > img,
-.illustrationCard {
+/* Every image wrapped in a card */
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 9 / 14;
+  background: #f5f3ef;
+}
+
+.card img {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-}
-
-.imageRail > img {
   object-fit: cover;
+  display: block;
 }
 
-/* Watercolor illustration cards — centered on matching off-white bg */
-.illustrationCard {
-  background: #f5f4f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.illustrationCard img {
-  width: auto;
-  height: 90%;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-/* ── Mobile: vertical scroll drives horizontal image scroll ── */
+/* ── Mobile: sticky horizontal scroll ── */
 @media (max-width: 700px) {
   .section {
     min-height: auto;
@@ -97,7 +84,6 @@
   }
 
   .scrollZone {
-    /* Tall enough so scrolling through it reveals all images */
     height: 300vh;
     position: relative;
     max-width: 100%;
@@ -112,25 +98,19 @@
   .imageRail {
     display: flex;
     overflow: hidden;
-    gap: 10px;
+    gap: 12px;
     padding: 0 16px 6px;
-    grid-auto-rows: unset;
   }
 
-  .imageRail > img,
-  .illustrationCard {
-    flex: 0 0 84%;
-    height: 380px;
-    min-height: 300px;
+  .card {
+    flex: 0 0 78%;
+    aspect-ratio: 9 / 14;
   }
 }
 
 @media (max-width: 380px) {
-  .imageRail > img,
-  .illustrationCard {
-    flex: 0 0 92%;
-    height: 320px;
-    min-height: 260px;
+  .card {
+    flex: 0 0 88%;
   }
 
   .copy {

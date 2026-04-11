@@ -19,7 +19,6 @@ export default function DressCode() {
       const rect = zone.getBoundingClientRect();
       const zoneHeight = zone.offsetHeight;
       const viewportH = window.innerHeight;
-      // progress 0→1 as we scroll through the zone
       const scrolled = -rect.top;
       const scrollable = zoneHeight - viewportH;
       if (scrollable <= 0) return;
@@ -47,18 +46,21 @@ export default function DressCode() {
         </div>
       </div>
 
-      {/* Scroll zone: tall on mobile to drive the horizontal scroll */}
       <div className={styles.scrollZone} ref={scrollZoneRef}>
         <div className={styles.stickyRail}>
           <div className={styles.imageRail} ref={railRef}>
-            <div className={styles.illustrationCard}>
+            <div className={styles.card}>
               <img src="/docs/images/dresscode-new1.jpg" alt="Dress code guide – Summer Elegant" loading="lazy" />
             </div>
-            <div className={styles.illustrationCard}>
+            <div className={styles.card}>
               <img src="/docs/images/dresscode-new2.jpg" alt="Dress code guide – Formal Attire" loading="lazy" />
             </div>
-            <img src="/docs/images/dresscode-guide.png" alt="Dress code inspiration board" loading="lazy" />
-            <img src="/docs/images/dresscode-ladies.webp" alt="Ladies dress inspiration" loading="lazy" />
+            <div className={styles.card}>
+              <img src="/docs/images/dresscode-guide.png" alt="Dress code inspiration board" loading="lazy" />
+            </div>
+            <div className={styles.card}>
+              <img src="/docs/images/dresscode-ladies.webp" alt="Ladies dress inspiration" loading="lazy" />
+            </div>
           </div>
         </div>
       </div>

@@ -64,10 +64,10 @@
   border: 1px solid rgba(75, 68, 57, 0.22);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
-  padding: 0 6px 0 10px;
+  padding: 0 32px 0 10px;
   width: min(100%, 220px);
   min-width: 0;
-  gap: 4px;
+  position: relative;
 }
 
 .suffix {
@@ -83,9 +83,12 @@
   justify-content: center;
   background: rgba(108, 108, 108, 0.18);
   cursor: pointer;
-  flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
