@@ -94,16 +94,15 @@
 
 .yearText {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 28px;
   fill: var(--color-gold-dark);
   font-weight: 600;
 }
 
 .milestoneText {
-  font-family: var(--font-serif);
-  font-size: 22px;
+  font-family: var(--font-sans);
+  font-size: 28px;
   fill: var(--color-text-light);
-  font-style: italic;
 }
 
 /* ── Final 2026 pill — filled ── */
@@ -113,7 +112,7 @@
 
 .finalText {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 28px;
   fill: var(--color-white);
   font-weight: 600;
 }
