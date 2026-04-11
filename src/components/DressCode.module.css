@@ -1,8 +1,5 @@
 .section {
   background: var(--color-blush-light);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
 }
 
 .content {
@@ -10,6 +7,7 @@
   margin: 0 auto;
   display: grid;
   gap: 16px;
+  padding-bottom: 24px;
 }
 
 .copy {
@@ -35,22 +33,41 @@
   font-weight: 400;
 }
 
+/* ── Desktop: scroll zone is just a simple container ── */
+.scrollZone {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.stickyRail {
+  /* no sticky on desktop */
+}
+
+/* Desktop: 2×2 grid */
 .imageRail {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  padding-bottom: 48px;
 }
 
 .imageRail img {
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 320px;
   object-fit: cover;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
 }
 
+/* ── Mobile: vertical scroll drives horizontal image scroll ── */
 @media (max-width: 700px) {
+  .section {
+    min-height: auto;
+    display: block;
+    padding-top: 48px;
+  }
+
   .copy {
     padding: 20px 16px;
   }
@@ -59,19 +76,29 @@
     font-size: 0.92rem;
   }
 
+  .scrollZone {
+    /* Tall enough so scrolling through it reveals all images */
+    height: 300vh;
+    position: relative;
+    max-width: 100%;
+  }
+
+  .stickyRail {
+    position: sticky;
+    top: 0;
+    padding: 16px 0;
+  }
+
   .imageRail {
     display: flex;
-    overflow-x: auto;
+    overflow: hidden;
     gap: 10px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px;
+    padding: 0 16px 6px;
   }
 
   .imageRail img {
     flex: 0 0 84%;
     min-height: 300px;
-    scroll-snap-align: start;
   }
 }
 
