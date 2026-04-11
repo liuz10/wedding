@@ -74,14 +74,27 @@
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(108, 108, 108, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.suffix:hover {
+  background: rgba(108, 108, 108, 0.3);
+}
+
+.suffix:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .spinner {

@@ -132,12 +132,13 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
                 enterKeyHint="go"
                 disabled={isSubmitting || !validateUrl}
               />
-              <span
+              <button
+                type="submit"
                 className={styles.suffix}
-                aria-hidden="true"
+                disabled={isSubmitting || !validateUrl}
               >
                 {isSubmitting ? <span className={styles.spinner} /> : '↑'}
-              </span>
+              </button>
             </span>
           </label>
           <button type="submit" className={styles.submitBtn} disabled={isSubmitting || !validateUrl}>

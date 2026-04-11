@@ -12,7 +12,7 @@ const zh = {
     "langToggle": "EN"
   },
   "hero": {
-    "mainTitle": "我们要结婚啦！",
+    "mainTitle": "我们结婚啦",
     "coupleName": "Alice & Johnny",
     "invite": "诚邀您共赴夏威夷拉奈岛，共度三天的庆祝时光。",
     "dateLabel": "日期",
@@ -136,7 +136,7 @@ const zh = {
     "y2020b": "Alice 搬到了",
     "y2020b2": "芝加哥！",
     "y2025": "Johnny 求婚啦！",
-    "y2026": "我们要结婚啦"
+    "y2026": "我们结婚啦"
   },
   "rsvp": {
     "subtitle": "请告诉我们",
