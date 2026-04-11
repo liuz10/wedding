@@ -84,7 +84,7 @@
   }
 
   .scrollZone {
-    height: 300vh;
+    height: 400vh;
     position: relative;
     max-width: 100%;
     display: flex;
@@ -101,19 +101,19 @@
   .imageRail {
     display: flex;
     overflow: hidden;
-    gap: 12px;
-    padding: 0 12px 6px;
+    gap: 24px;
+    padding: 0 16px 6px;
   }
 
   .card {
-    flex: 0 0 92vw;
+    flex: 0 0 86vw;
     aspect-ratio: 9 / 16;
   }
 }
 
 @media (max-width: 380px) {
   .card {
-    flex: 0 0 94vw;
+    flex: 0 0 88vw;
   }
 
   .copy {
