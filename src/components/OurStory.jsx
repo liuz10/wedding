@@ -32,7 +32,7 @@ export default function OurStory() {
         <div className={styles.timelineWrapper}>
           <svg
             className={styles.timelineSvg}
-            viewBox="0 0 680 1600"
+            viewBox="0 0 680 1680"
             xmlns="http://www.w3.org/2000/svg"
             role="img"
             aria-label="Our relationship timeline from 2019 to 2026"
@@ -101,7 +101,7 @@ export default function OurStory() {
             <line className={styles.pinStem} x1="100" y1="1409" x2="100" y2="1438" />
             <rect className={styles.finalPill} x="42" y="1438" width="116" height="44" rx="22" />
             <text className={styles.finalText} x="100" y="1467" textAnchor="middle">2026</text>
-            <text className={styles.milestoneText} x="100" y="1512" textAnchor="middle">
+            <text className={styles.milestoneText} x="100" y="1520" textAnchor="middle">
               {t('story.y2026')}
             </text>
           </svg>
