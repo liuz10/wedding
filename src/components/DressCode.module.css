@@ -47,17 +47,37 @@
 .imageRail {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 420px;
   gap: 16px;
   padding-bottom: 48px;
 }
 
-.imageRail img {
+.imageRail > img,
+.illustrationCard {
   width: 100%;
   height: 100%;
-  min-height: 320px;
-  object-fit: cover;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.imageRail > img {
+  object-fit: cover;
+}
+
+/* Watercolor illustration cards — centered on matching off-white bg */
+.illustrationCard {
+  background: #f5f4f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illustrationCard img {
+  width: auto;
+  height: 90%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* ── Mobile: vertical scroll drives horizontal image scroll ── */
@@ -94,17 +114,22 @@
     overflow: hidden;
     gap: 10px;
     padding: 0 16px 6px;
+    grid-auto-rows: unset;
   }
 
-  .imageRail img {
+  .imageRail > img,
+  .illustrationCard {
     flex: 0 0 84%;
+    height: 380px;
     min-height: 300px;
   }
 }
 
 @media (max-width: 380px) {
-  .imageRail img {
+  .imageRail > img,
+  .illustrationCard {
     flex: 0 0 92%;
+    height: 320px;
     min-height: 260px;
   }
 

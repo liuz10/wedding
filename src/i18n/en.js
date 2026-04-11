@@ -125,7 +125,8 @@ const en = {
     y2020b: 'Alice moved to',
     y2020b2: 'Chicago!',
     y2025: 'Johnny proposed!',
-    y2026: 'We\'re getting married!',
+    y2026a: 'We\'re getting',
+    y2026b: 'married!',
   },
 
   // ── RSVP ──

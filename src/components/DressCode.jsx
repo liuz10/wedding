@@ -51,8 +51,12 @@ export default function DressCode() {
       <div className={styles.scrollZone} ref={scrollZoneRef}>
         <div className={styles.stickyRail}>
           <div className={styles.imageRail} ref={railRef}>
-            <img src="/docs/images/dresscode-new1.jpg" alt="Dress code guide 1" loading="lazy" />
-            <img src="/docs/images/dresscode-new2.jpg" alt="Dress code guide 2" loading="lazy" />
+            <div className={styles.illustrationCard}>
+              <img src="/docs/images/dresscode-new1.jpg" alt="Dress code guide – Summer Elegant" loading="lazy" />
+            </div>
+            <div className={styles.illustrationCard}>
+              <img src="/docs/images/dresscode-new2.jpg" alt="Dress code guide – Formal Attire" loading="lazy" />
+            </div>
             <img src="/docs/images/dresscode-guide.png" alt="Dress code inspiration board" loading="lazy" />
             <img src="/docs/images/dresscode-ladies.webp" alt="Ladies dress inspiration" loading="lazy" />
           </div>
