@@ -94,14 +94,14 @@
 
 .yearText {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: 24px;
   fill: var(--color-gold-dark);
   font-weight: 600;
 }
 
 .milestoneText {
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 22px;
   fill: var(--color-text-light);
   font-style: italic;
 }
@@ -113,7 +113,7 @@
 
 .finalText {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: 24px;
   fill: var(--color-white);
   font-weight: 600;
 }

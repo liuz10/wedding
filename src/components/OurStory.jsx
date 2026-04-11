@@ -50,12 +50,12 @@ export default function OurStory() {
             />
 
             {/* ── 2019 — We met! ── */}
-            <circle className={styles.pinCircle} cx="100" cy="100" r="7" />
-            <circle className={styles.pinDot} cx="100" cy="100" r="3" />
-            <line className={styles.pinStem} x1="100" y1="107" x2="100" y2="134" />
-            <rect className={styles.yearPill} x="56" y="134" width="88" height="36" rx="18" />
-            <text className={styles.yearText} x="100" y="157" textAnchor="middle">2019</text>
-            <text className={styles.milestoneText} x="100" y="198" textAnchor="middle">{t('story.y2019')}</text>
+            <circle className={styles.pinCircle} cx="100" cy="100" r="9" />
+            <circle className={styles.pinDot} cx="100" cy="100" r="4" />
+            <line className={styles.pinStem} x1="100" y1="109" x2="100" y2="138" />
+            <rect className={styles.yearPill} x="42" y="138" width="116" height="44" rx="22" />
+            <text className={styles.yearText} x="100" y="167" textAnchor="middle">2019</text>
+            <text className={styles.milestoneText} x="100" y="212" textAnchor="middle">{t('story.y2019')}</text>
 
             {/* William photo — circular with outline */}
             <image
@@ -70,38 +70,38 @@ export default function OurStory() {
             <circle cx="460" cy="400" r="57" fill="none" className={styles.photoOutline} />
 
             {/* ── 2020 — Our dog William is born! ── */}
-            <circle className={styles.pinCircle} cx="580" cy="460" r="7" />
-            <circle className={styles.pinDot} cx="580" cy="460" r="3" />
-            <line className={styles.pinStem} x1="580" y1="467" x2="580" y2="498" />
-            <rect className={styles.yearPill} x="536" y="498" width="88" height="36" rx="18" />
-            <text className={styles.yearText} x="580" y="521" textAnchor="middle">2020</text>
-            <text className={styles.milestoneText} x="580" y="562" textAnchor="middle">{t('story.y2020a')}</text>
-            <text className={styles.milestoneText} x="580" y="581" textAnchor="middle">{t('story.y2020a2')}</text>
+            <circle className={styles.pinCircle} cx="580" cy="460" r="9" />
+            <circle className={styles.pinDot} cx="580" cy="460" r="4" />
+            <line className={styles.pinStem} x1="580" y1="469" x2="580" y2="498" />
+            <rect className={styles.yearPill} x="522" y="498" width="116" height="44" rx="22" />
+            <text className={styles.yearText} x="580" y="527" textAnchor="middle">2020</text>
+            <text className={styles.milestoneText} x="580" y="572" textAnchor="middle">{t('story.y2020a')}</text>
+            <text className={styles.milestoneText} x="580" y="597" textAnchor="middle">{t('story.y2020a2')}</text>
 
             {/* ── 2020 — Alice moved to Chicago! ── */}
-            <circle className={styles.pinCircle} cx="100" cy="820" r="7" />
-            <circle className={styles.pinDot} cx="100" cy="820" r="3" />
-            <line className={styles.pinStem} x1="100" y1="827" x2="100" y2="858" />
-            <rect className={styles.yearPill} x="56" y="858" width="88" height="36" rx="18" />
-            <text className={styles.yearText} x="100" y="881" textAnchor="middle">2020</text>
-            <text className={styles.milestoneText} x="100" y="922" textAnchor="middle">{t('story.y2020b')}</text>
-            <text className={styles.milestoneText} x="100" y="941" textAnchor="middle">{t('story.y2020b2')}</text>
+            <circle className={styles.pinCircle} cx="100" cy="820" r="9" />
+            <circle className={styles.pinDot} cx="100" cy="820" r="4" />
+            <line className={styles.pinStem} x1="100" y1="829" x2="100" y2="858" />
+            <rect className={styles.yearPill} x="42" y="858" width="116" height="44" rx="22" />
+            <text className={styles.yearText} x="100" y="887" textAnchor="middle">2020</text>
+            <text className={styles.milestoneText} x="100" y="932" textAnchor="middle">{t('story.y2020b')}</text>
+            <text className={styles.milestoneText} x="100" y="957" textAnchor="middle">{t('story.y2020b2')}</text>
 
             {/* ── 2025 — Johnny proposed! ── */}
-            <circle className={styles.pinCircle} cx="580" cy="1100" r="7" />
-            <circle className={styles.pinDot} cx="580" cy="1100" r="3" />
-            <line className={styles.pinStem} x1="580" y1="1107" x2="580" y2="1138" />
-            <rect className={styles.yearPill} x="536" y="1138" width="88" height="36" rx="18" />
-            <text className={styles.yearText} x="580" y="1161" textAnchor="middle">2025</text>
-            <text className={styles.milestoneText} x="580" y="1202" textAnchor="middle">{t('story.y2025')}</text>
+            <circle className={styles.pinCircle} cx="580" cy="1100" r="9" />
+            <circle className={styles.pinDot} cx="580" cy="1100" r="4" />
+            <line className={styles.pinStem} x1="580" y1="1109" x2="580" y2="1138" />
+            <rect className={styles.yearPill} x="522" y="1138" width="116" height="44" rx="22" />
+            <text className={styles.yearText} x="580" y="1167" textAnchor="middle">2025</text>
+            <text className={styles.milestoneText} x="580" y="1212" textAnchor="middle">{t('story.y2025')}</text>
 
             {/* ── 2026 — We're getting married! ── */}
-            <circle className={styles.pinCircle} cx="100" cy="1400" r="7" />
-            <circle className={styles.pinDot} cx="100" cy="1400" r="3" />
-            <line className={styles.pinStem} x1="100" y1="1407" x2="100" y2="1438" />
-            <rect className={styles.finalPill} x="52" y="1438" width="96" height="36" rx="18" />
-            <text className={styles.finalText} x="100" y="1461" textAnchor="middle">2026</text>
-            <text className={styles.milestoneText} x="100" y="1502" textAnchor="middle">
+            <circle className={styles.pinCircle} cx="100" cy="1400" r="9" />
+            <circle className={styles.pinDot} cx="100" cy="1400" r="4" />
+            <line className={styles.pinStem} x1="100" y1="1409" x2="100" y2="1438" />
+            <rect className={styles.finalPill} x="42" y="1438" width="116" height="44" rx="22" />
+            <text className={styles.finalText} x="100" y="1467" textAnchor="middle">2026</text>
+            <text className={styles.milestoneText} x="100" y="1512" textAnchor="middle">
               {t('story.y2026')}
             </text>
           </svg>
