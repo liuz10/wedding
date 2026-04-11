@@ -19,9 +19,9 @@ const en = {
     coupleName: 'Alice & Johnny',
     invite: 'Join us for a three-day celebration in Lanai, Hawaii.',
     dateLabel: 'Date',
-    dateValue: 'August 8th 2026',
+    dateValue: 'August 8th, 2026',
     locationLabel: 'Location',
-    locationValue: 'Lanai Four Season Resort',
+    locationValue: 'Four Seasons Resort Lānaʻi',
   },
 
   // ── Booking Instructions ──
@@ -162,7 +162,7 @@ const en = {
   gallery: {
     subtitle: 'Memories',
     title: 'Our Gallery',
-    intro: 'Photos coming soon \u2014 we\'ll share our favourite moments here.',
+    intro: 'Photos coming soon \u2014 we\'ll share our favorite moments here.',
   },
 
   // ── Footer ──

@@ -58,7 +58,7 @@ export default function GettingThere() {
         <div className={styles.footnote}>
           <strong>{t('getting.footnoteTitle')}</strong>{' '}
           {t('getting.footnoteText')}{' '}
-          <a href="http://go-lanai.com/" target="_blank" rel="noreferrer">{t('getting.footnoteLink')}</a>{' '}
+          <a href="https://go-lanai.com/" target="_blank" rel="noreferrer">{t('getting.footnoteLink')}</a>{' '}
           {t('getting.footnoteAfter')}
         </div>
       </div>

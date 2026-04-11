@@ -22,6 +22,7 @@ export function LanguageProvider({ children }) {
 
   const setLang = useCallback((newLang) => {
     setLangState(newLang);
+    document.documentElement.lang = newLang === 'zh' ? 'zh-CN' : 'en';
     try {
       localStorage.setItem(STORAGE_KEY, newLang);
     } catch {
