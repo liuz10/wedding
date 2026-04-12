@@ -4,6 +4,13 @@ import dogImage from '../assets/Subject.png';
 import styles from './AccessGate.module.css';
 
 const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+const GOOGLE_TIMEOUT_MS = 3500;
+
+// SHA-256 hashes of valid passphrases (normalized).
+// Generate with: node scripts/generate-hashes.mjs "phrase1" "phrase2"
+const VALID_HASHES = [
+  'cc8e78a09773693de78fcbd8dd5fd2afed3381dafd61e7d4d4f6f4ecd001db7d',
+];
 
 function normalizeAnswer(value) {
   return value
@@ -11,6 +18,14 @@ function normalizeAnswer(value) {
     .replace(/^hi,\s*/i, '')
     .replace(/[!?.]+$/g, '')
     .trim();
+}
+
+async function sha256(text) {
+  const data = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 }
 
 function buildValidateUrl() {
@@ -25,6 +40,46 @@ function buildValidateUrl() {
   return endpoint.toString();
 }
 
+// Validate via Google Apps Script (JSONP) with a timeout
+function googleValidate(validateUrl, normalizedAnswer) {
+  return new Promise((resolve, reject) => {
+    const callbackName = `__weddingGateCb_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+    const script = document.createElement('script');
+    const endpoint = new URL(validateUrl);
+    endpoint.searchParams.set('answer', normalizedAnswer);
+    endpoint.searchParams.set('callback', callbackName);
+
+    let settled = false;
+    const cleanup = () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+      delete window[callbackName];
+    };
+
+    window[callbackName] = (payload) => {
+      settled = true;
+      cleanup();
+      resolve(payload);
+    };
+
+    script.onerror = () => {
+      if (!settled) {
+        cleanup();
+        reject(new Error('Validation request failed.'));
+      }
+    };
+
+    script.src = endpoint.toString();
+    document.body.appendChild(script);
+  });
+}
+
+// Validate locally against SHA-256 hashes
+async function hashValidate(normalizedAnswer) {
+  if (VALID_HASHES.length === 0) return null; // no hashes configured
+  const hash = await sha256(normalizedAnswer);
+  return { result: 'success', valid: VALID_HASHES.includes(hash) };
+}
+
 export default function AccessGate({ isUnlocked, onUnlock }) {
   const { t } = useLanguage();
   const [answer, setAnswer] = useState('');
@@ -33,49 +88,36 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
   const [isUnlocking, setIsUnlocking] = useState(false);
 
   const validateUrl = useMemo(() => buildValidateUrl(), []);
+  const hasAnyValidation = validateUrl || VALID_HASHES.length > 0;
   const isHidden = isUnlocked && !isUnlocking;
 
-  const validatePassphrase = (normalizedAnswer) =>
-    new Promise((resolve, reject) => {
-      if (!validateUrl) {
-        reject(new Error('Validation URL is missing.'));
-        return;
+  const validatePassphrase = async (normalizedAnswer) => {
+    // Strategy: hash first (instant), then Google as fallback
+    const hashResult = await hashValidate(normalizedAnswer);
+    if (hashResult?.valid) return hashResult;
+
+    // If hash didn't match, try Google (may have newer passphrases)
+    if (validateUrl) {
+      try {
+        return await Promise.race([
+          googleValidate(validateUrl, normalizedAnswer),
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('timeout')), GOOGLE_TIMEOUT_MS)
+          ),
+        ]);
+      } catch {
+        // Google unreachable — use hash result as final answer
       }
+    }
 
-      const callbackName = `__weddingGateCb_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
-      const script = document.createElement('script');
-      const endpoint = new URL(validateUrl);
-      endpoint.searchParams.set('answer', normalizedAnswer);
-      endpoint.searchParams.set('callback', callbackName);
-
-      let settled = false;
-      const cleanup = () => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-        delete window[callbackName];
-      };
-
-      window[callbackName] = (payload) => {
-        settled = true;
-        cleanup();
-        resolve(payload);
-      };
-
-      script.onerror = () => {
-        if (!settled) {
-          cleanup();
-          reject(new Error('Validation request failed.'));
-        }
-      };
-
-      script.src = endpoint.toString();
-      document.body.appendChild(script);
-    });
+    // Return hash result (invalid) or error
+    if (hashResult) return hashResult;
+    throw new Error('No validation method available.');
+  };
 
   const handleValidate = async (event) => {
     event.preventDefault();
-    if (!validateUrl || isSubmitting) return;
+    if (!hasAnyValidation || isSubmitting) return;
 
     setIsSubmitting(true);
     try {
@@ -108,9 +150,9 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
       <div className={styles.centered}>
         <img src={dogImage} alt="Dog wearing sunglasses" className={styles.image} />
 
-        {!validateUrl && (
+        {!hasAnyValidation && (
           <p className={styles.devWarning}>
-            Set <code>VITE_GOOGLE_SCRIPT_URL</code> to enable passphrase validation.
+            Set <code>VITE_GOOGLE_SCRIPT_URL</code> or add hashes to enable validation.
           </p>
         )}
 
@@ -130,21 +172,21 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
                 autoComplete="off"
                 required
                 enterKeyHint="go"
-                disabled={isSubmitting || !validateUrl}
+                disabled={isSubmitting || !hasAnyValidation}
               />
               <span
                 role="button"
                 tabIndex={0}
                 className={styles.suffix}
                 onClick={() => {
-                  if (!isSubmitting && validateUrl) {
+                  if (!isSubmitting && hasAnyValidation) {
                     document.getElementById('gate-form').requestSubmit();
                   }
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    if (!isSubmitting && validateUrl) {
+                    if (!isSubmitting && hasAnyValidation) {
                       document.getElementById('gate-form').requestSubmit();
                     }
                   }
@@ -154,7 +196,7 @@ export default function AccessGate({ isUnlocked, onUnlock }) {
               </span>
             </span>
           </label>
-          <button type="submit" className={styles.submitBtn} disabled={isSubmitting || !validateUrl}>
+          <button type="submit" className={styles.submitBtn} disabled={isSubmitting || !hasAnyValidation}>
             {isSubmitting ? t('gate.checking') : t('gate.submit')}
           </button>
         </form>
